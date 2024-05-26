@@ -88,5 +88,262 @@ export const OPTIONS = [
   { name: "Dry Van Trailers", key: "dry_van_trailers" },
   { name: "Power-Only Trucks", key: "power_only_trucks" },
 ];
+export const INVENTORYOPTIONS = [
+  { key: "pallets", name: "Pallets" },
+  { key: "bags", name: "Bags" },
+  { key: "bales", name: "Bales" },
+  { key: "boxes", name: "Boxes" },
+  { key: "bundles", name: "Bundles" },
+  { key: "carpets", name: "Carpets" },
+  { key: "coils", name: "Coils" },
+  { key: "crates", name: "Crates" },
+  { key: "cylinders", name: "Cylinders" },
+  { key: "drums", name: "Drums" },
+  { key: "pails", name: "Pails" },
+  { key: "reels", name: "Reels" },
+  { key: "rolls", name: "Rolls" },
+  { key: "tubes_puppies", name: "Tubes/puppies" },
+  { key: "household_furniture", name: "Household furniture" },
+  { key: "vehicle", name: "Vehicle" },
+  { key: "industry_machinery", name: "Industry machinery" },
+  { key: "others", name: "Others" }
+];
 
+
+export const TRUCKADD = [
+  {
+    vehicleinventoryPicture: "https://picsum.photos/150/?random11",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda-12/14 ft",
+    countryName: "USA",
+    city: "New York"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random12",
+    vehicleName: "Shahzor",
+    vehicleType: "Shahzor-9ft open",
+    countryName: "Canada",
+    city: "Toronto"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random13",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda-16/17/18 ft",
+    countryName: "UK",
+    city: "London"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random14",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda-19/20 ft",
+    countryName: "Australia",
+    city: "Sydney"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random15",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda flat bed-25x8",
+    countryName: "India",
+    city: "Mumbai"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random16",
+    vehicleName: "Boom truck",
+    vehicleType: "Boom truck -16 ft",
+    countryName: "Germany",
+    city: "Berlin"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random17",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda -17ft",
+    countryName: "France",
+    city: "Paris"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random18",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda-12/14 ft",
+    countryName: "Italy",
+    city: "Rome"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random19",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda-16/17/18 ft",
+    countryName: "Spain",
+    city: "Madrid"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random20",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda-19/20 ft",
+    countryName: "Netherlands",
+    city: "Amsterdam"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random1",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda flat bed-25x8",
+    countryName: "Sweden",
+    city: "Stockholm"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random2",
+    vehicleName: "Shahzor",
+    vehicleType: "Shahzor-9ft open",
+    countryName: "Norway",
+    city: "Oslo"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random3",
+    vehicleName: "Boom truck",
+    vehicleType: "Boom truck -16 ft",
+    countryName: "Denmark",
+    city: "Copenhagen"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random4",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda -17ft",
+    countryName: "Belgium",
+    city: "Brussels"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random5",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda-12/14 ft",
+    countryName: "Finland",
+    city: "Helsinki"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random6",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda-16/17/18 ft",
+    countryName: "Switzerland",
+    city: "Zurich"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random7",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda-19/20 ft",
+    countryName: "Austria",
+    city: "Vienna"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random8",
+    vehicleName: "Mazda",
+    vehicleType: "Mazda flat bed-25x8",
+    countryName: "Portugal",
+    city: "Lisbon"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random9",
+    vehicleName: "Shahzor",
+    vehicleType: "Shahzor-9ft open",
+    countryName: "Greece",
+    city: "Athens"
+  },
+  {
+    vehiclePicture: "https://picsum.photos/150/?random10",
+    vehicleName: "Boom truck",
+    vehicleType: "Boom truck -16 ft",
+    countryName: "Ireland",
+    city: "Dublin"
+  }
+];
+
+
+export const INVENTORYADD = [
+  {
+    inventoryPicture: "https://picsum.photos/150/?random1",
+    inventorySize: "Large",
+    ownerName: "John Doe",
+    inventoryType: "Boxes",
+    countryName: "USA",
+    city: "New York",
+    location: "123 Main St, New York",
+  },
+  {
+    inventoryPicture: "https://picsum.photos/150/?random2",
+    inventorySize: "Medium",
+    ownerName: "Jane Smith",
+    inventoryType: "Bags",
+    countryName: "USA",
+    city: "Los Angeles",
+    location: "456 Elm St, Los Angeles",
+  },
+  {
+    inventoryPicture: "https://picsum.photos/150/?random3",
+    inventorySize: "Small",
+    ownerName: "Michael Johnson",
+    inventoryType: "Bales",
+    countryName: "Canada",
+    city: "Toronto",
+    location: "789 Oak St, Toronto",
+  },
+  {
+    inventoryPicture: "https://picsum.photos/150/?random4",
+    inventorySize: "Large",
+    ownerName: "Emily Brown",
+    inventoryType: "Crates",
+    countryName: "UK",
+    city: "London",
+    location: "101 Pine St, London",
+  },
+  {
+    inventoryPicture: "https://picsum.photos/150/?random5",
+    inventorySize: "Medium",
+    ownerName: "Chris Wilson",
+    inventoryType: "Reels",
+    countryName: "France",
+    city: "Paris",
+    location: "202 Maple St, Paris",
+  },
+  {
+    inventoryPicture: "https://picsum.photos/150/?random6",
+    inventorySize: "Small",
+    ownerName: "Samantha Lee",
+    inventoryType: "Drums",
+    countryName: "Germany",
+    city: "Berlin",
+    location: "303 Birch St, Berlin",
+  },
+  {
+    inventoryPicture: "https://picsum.photos/150/?random7",
+    inventorySize: "Large",
+    ownerName: "David Martinez",
+    inventoryType: "Coils",
+    countryName: "Spain",
+    city: "Madrid",
+    location: "404 Cedar St, Madrid",
+  },
+  {
+    inventoryPicture: "https://picsum.photos/150/?random8",
+    inventorySize: "Medium",
+    ownerName: "Jessica Taylor",
+    inventoryType: "Pallets",
+    countryName: "Australia",
+    city: "Sydney",
+    location: "505 Pine St, Sydney",
+  },
+  {
+    inventoryPicture: "https://picsum.photos/150/?random9",
+    inventorySize: "Small",
+    ownerName: "Matthew Miller",
+    inventoryType: "Household furniture",
+    countryName: "Italy",
+    city: "Rome",
+    location: "606 Cedar St, Rome",
+  },
+  {
+    inventoryPicture: "https://picsum.photos/150/?random10",
+    inventorySize: "Large",
+    ownerName: "Amanda Thomas",
+    inventoryType: "Industry machinery",
+    countryName: "Japan",
+    city: "Tokyo",
+    location: "707 Oak St, Tokyo",
+  },
+];
 
