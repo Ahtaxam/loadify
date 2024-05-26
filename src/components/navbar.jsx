@@ -3,6 +3,7 @@ import Logo from "../assets/images/logo.png";
 import { Navbar } from "flowbite-react";
 
 import { Link } from "react-router-dom";
+import { PATH } from "../utils/path";
 
 function NavbarComponent() {
   return (
@@ -15,15 +16,15 @@ function NavbarComponent() {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link href="#" active>
+        <Link to={PATH.HOME} active>
           Home
-        </Navbar.Link>
-        <Navbar.Link as={Link} href="#">
+        </Link>
+        <Link as={Link} href="#">
           About
-        </Navbar.Link>
-        <Navbar.Link href="#">Login</Navbar.Link>
-        <Navbar.Link href="#">Signup</Navbar.Link>
-        <Navbar.Link href="#">Whyus</Navbar.Link>
+        </Link>
+        <Link to={PATH.LOGIN}>Login</Link>
+        <Link to={PATH.SIGNUP}>Signup</Link>
+        <Link to="#">Whyus</Link>
       </Navbar.Collapse>
     </Navbar>
   );
