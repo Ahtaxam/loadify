@@ -16,7 +16,7 @@ function NavbarComponent() {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Link to={PATH.HOME} active>
+        <Link to={PATH.HOME}>
           Home
         </Link>
         <Link as={Link} href="#">

@@ -6,7 +6,7 @@ import Button from "../../../components/button";
 import { Link } from "react-router-dom";
 import { PATH } from "../../../utils/path";
 
-const ROLE = ["Contractor", "Inventory"];
+const ROLE = ["Truck Loader", "Inventory"];
 function Signup() {
   const [selectedRole, setSelectedRole] = useState(ROLE[0]);
   const initialValues = {
