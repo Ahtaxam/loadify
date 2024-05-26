@@ -16,7 +16,7 @@ function InventoryDetail() {
       <div className="flex justify-end">
         <Button className="bg-navy w-[100px] hover:bg-white hover:text-black hover:border-2 hover:border-dotted">Chat</Button>
       </div>
-      <div className="flex justify-between p-4">
+      <div className="flex justify-between flex-wrap p-4">
         <p>
           <span className="font-bold">Type: </span> BAG
         </p>
@@ -28,7 +28,7 @@ function InventoryDetail() {
         </p>
       </div>
 
-      <div className="flex justify-between p-4">
+      <div className="flex justify-between flex-wrap p-4">
         <p>
           <span className="font-bold">Owner Name: </span> Ahmed Khan
         </p>
@@ -41,7 +41,7 @@ function InventoryDetail() {
         MAO College, near jain mandir, Lahore, punjab
       </p>
 
-      <div className="flex justify-between p-4">
+      <div className="flex justify-between flex-wrap p-4">
         <p>
           <span className="font-bold">Country: </span> Pakistan
         </p>
