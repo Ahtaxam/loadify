@@ -18,8 +18,8 @@ function SwiperComponent({ data, text, type }) {
           spaceBetween={10}
           slidesPerView={5}
           navigation={true}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
         >
           {data.map((data, index) => (
             <SwiperSlide key={index}>

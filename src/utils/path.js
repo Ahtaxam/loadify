@@ -3,8 +3,13 @@ export const PATH = {
     LOGIN:"/login",
     SIGNUP:"/signup",
     USERSHOME:"/postadds",
-    LOADERADDS:"/loader/add",
-    INVENTORYADD:"/inventory/add",
-    INVENTORYDETAIL:"/inventory/detail/:id"
+    
+    LOADERADDS:"/truckloader",
+    INVENTORYADD:"/inventory",
+
+    INVENTORYDETAIL:"/inventory/detail/:id",
+    SHOWINVENTORYDETAIL:"/inventory/detail",
+    LOADERDETAIL:"/loader/detail/:id",
+    SHOWLOADERDETAIL:"/loader/detail"
 
 }

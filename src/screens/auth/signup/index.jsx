@@ -3,12 +3,17 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikController from "../../../components/formik/formikController";
 import Button from "../../../components/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PATH } from "../../../utils/path";
+import { useCreateUserMutation } from "../../../redux/api/user";
+import { toast } from "react-toastify";
+import { storeCurrentUser } from "../../../utils/currentUser";
 
 const ROLE = ["Truck Loader", "Inventory"];
 function Signup() {
+  const [createUser, { isLoading }] = useCreateUserMutation();
   const [selectedRole, setSelectedRole] = useState(ROLE[0]);
+  const navigate = useNavigate();
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -32,8 +37,23 @@ function Signup() {
     setSelectedRole(name);
     setFieldValue("role", name);
   };
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     console.log(values);
+    try {
+      const { message, data, token } = await createUser(values).unwrap();
+      toast.success(message);
+      storeCurrentUser({ ...data, token });
+      if (data?.role === "Truck Loader") {
+        navigate(PATH.LOADERADDS);
+        return;
+      } else {
+        navigate(PATH.INVENTORYADD);
+        return;
+      }
+    } catch (error) {
+      toast.error(error?.data?.message);
+      console.log(error);
+    }
   };
 
   return (
@@ -99,9 +119,14 @@ function Signup() {
                 ))}
               </div>
               <Button type="submit" className="w-full">
-                Submit
+                {isLoading ? "Creating..." : "Signup"}
               </Button>
-              <p className="text-sm text-right">Already have an account? <Link to={PATH.LOGIN} className="underline">Login</Link></p>
+              <p className="text-sm text-right">
+                Already have an account?{" "}
+                <Link to={PATH.LOGIN} className="underline">
+                  Login
+                </Link>
+              </p>
             </Form>
           )}
         </Formik>

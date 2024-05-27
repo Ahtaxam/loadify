@@ -4,11 +4,12 @@ import AddsScreenHeader from "../../components/addScreenHeader";
 import { INVENTORYADD, INVENTORYOPTIONS } from "../../utils/data";
 import InventoryCard from "../../components/inventoryCard";
 import { useNavigate } from "react-router-dom";
+import { PATH } from "../../utils/path";
 
 function TruckLoader() {
   const navigate = useNavigate();
   const handleInventoryDetail = (id) => {
-    navigate(`/inventory/detail/${2}`);
+    navigate(`${PATH.SHOWINVENTORYDETAIL}/${2}`);
   };
   return (
     <div>

@@ -8,6 +8,9 @@ import HomeMain from "../screens/home";
 import ProtectedRoute from "./ProtectedRoute";
 import TruckLoader from "../screens/loader";
 import InventoryDetail from "../components/inventoryDetail";
+import RoleRoute from "./RoleRoute";
+import InventoryHolder from "../screens/inventory";
+import LoaderDetail from "../components/loaderDetail";
 
 function AppRoute() {
   return (
@@ -21,7 +24,10 @@ function AppRoute() {
           path={PATH.LOADERADDS}
           element={
             <ProtectedRoute>
-              <TruckLoader />
+              <RoleRoute roles={["Truck Loader"]}>
+                {" "}
+                <TruckLoader />
+              </RoleRoute>
             </ProtectedRoute>
           }
         />
@@ -30,7 +36,30 @@ function AppRoute() {
           path={PATH.INVENTORYDETAIL}
           element={
             <ProtectedRoute>
-              <InventoryDetail />
+              <RoleRoute roles={["Truck Loader"]}>
+                <InventoryDetail />
+              </RoleRoute>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.INVENTORYADD}
+          element={
+            <ProtectedRoute>
+              <RoleRoute roles={["Inventory"]}>
+                <InventoryHolder />
+              </RoleRoute>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path={PATH.LOADERDETAIL}
+          element={
+            <ProtectedRoute>
+              <RoleRoute roles={["Inventory"]}>
+                <LoaderDetail />
+              </RoleRoute>
             </ProtectedRoute>
           }
         />

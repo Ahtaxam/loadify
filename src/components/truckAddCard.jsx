@@ -1,19 +1,29 @@
 import { Card } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import { PATH } from "../utils/path";
+import { toast } from "react-toastify";
+import { getUserRole } from "../utils/currentUser";
 // import {Image} from "flowbite-react";
 
 function TruckAddCard({ data }) {
   const { vehiclePicture, vehicleName, vehicleType, countryName, city } = data;
   const navigate = useNavigate();
-  const handleAddDetail = () => {
-    navigate(PATH.LOADERADDS)
+  const role = getUserRole();
+  const handleTruckAddDetail = () => {
+    console.log("CLICKED: ", role);
+          navigate(`${PATH.SHOWLOADERDETAIL}/2`);
+
+    // if (role === "Inventory") {
+    //   navigate(`${PATH.SHOWINVENTORYDETAIL}/2`);
+    // } else {
+    //   toast.error("You are unAuthorized to View This Add");
+    // }
   };
 
   return (
     <div
       className="p-4 max-w-lg border border-indigo-300 rounded-2xl hover:shadow-xl hover:shadow-indigo-50 flex flex-col cursor-pointer"
-      onClick={handleAddDetail}
+      onClick={handleTruckAddDetail}
     >
       <img
         src={vehiclePicture}
