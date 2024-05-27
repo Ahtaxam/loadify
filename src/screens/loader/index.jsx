@@ -5,6 +5,7 @@ import { INVENTORYADD, INVENTORYOPTIONS } from "../../utils/data";
 import InventoryCard from "../../components/inventoryCard";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../utils/path";
+import Typography from '../../components/typography';
 
 function TruckLoader() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function TruckLoader() {
   return (
     <div>
       <AddsScreenHeader />
-      <p className="text-center m-4 text-2xl">All Inventories</p>
+      <Typography className="m-4">All Inventories</Typography>
       <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 justify-items-center py-4 px-2">
         {INVENTORYADD.map((obj, i) => (
           <InventoryCard data={obj} key={i} onClick={handleInventoryDetail} />

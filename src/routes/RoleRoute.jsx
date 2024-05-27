@@ -8,7 +8,7 @@ function RoleRoute({ children, roles }) {
   console.log(user, roles);
   return !roles.length || roles.includes(user)
     ? children
-    : <Navigate to="/unauthorized" replace />;
+    : <Navigate to={PATH.UNAUTHORIZED} replace />;
 }
 
 export default RoleRoute;

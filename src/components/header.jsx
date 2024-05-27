@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import { Avatar, Dropdown, Modal, Navbar } from "flowbite-react";
 import { PATH } from "../utils/path";
@@ -7,9 +7,12 @@ import { useState } from "react";
 import ModalCustom from "./modal";
 import PostAdd from "../screens/home/postAdd";
 import InventoryAdd from "../screens/home/inventoryAdd";
+import { getCurrentUser, getUserRole, logoutCurrentUser } from '../utils/currentUser';
 
 function Header() {
-  const role = "g";
+  const role = getUserRole();
+  const user = getCurrentUser();
+  const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const handleRegisterVehicle = () => {
     setOpenModal(true);
@@ -18,6 +21,12 @@ function Header() {
   const handlePostingAdd = () => {
     setOpenModal(true);
   };
+
+  const handleSignOut = () => {
+    console.log("CLICKED");
+    logoutCurrentUser();
+    navigate(PATH.HOME)
+  }
   return (
     <>
       <ModalCustom open={openModal} setOpen={setOpenModal}>
@@ -60,14 +69,18 @@ function Header() {
             }
           >
             <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
+              <span className="block text-sm mb-2">{user.firstName} {user.lastName} </span>
               <span className="block truncate text-sm font-medium">
-                name@flowbite.com
+                {user.email}
               </span>
             </Dropdown.Header>
+            <Dropdown.Divider />
+              <span className="text-sm font-medium ml-4">
+                Role: {role}
+              </span>
 
             <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignOut} className="text-red-900">Sign out</Dropdown.Item>
           </Dropdown>
 
           <Navbar.Toggle />

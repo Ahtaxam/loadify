@@ -10,6 +10,9 @@ export const PATH = {
     INVENTORYDETAIL:"/inventory/detail/:id",
     SHOWINVENTORYDETAIL:"/inventory/detail",
     LOADERDETAIL:"/loader/detail/:id",
-    SHOWLOADERDETAIL:"/loader/detail"
+    SHOWLOADERDETAIL:"/loader/detail",
+
+
+    UNAUTHORIZED:"/unauthorized"
 
 }

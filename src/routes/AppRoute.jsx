@@ -11,6 +11,7 @@ import InventoryDetail from "../components/inventoryDetail";
 import RoleRoute from "./RoleRoute";
 import InventoryHolder from "../screens/inventory";
 import LoaderDetail from "../components/loaderDetail";
+import UnAuthorized from '../screens/unAuthorized';
 
 function AppRoute() {
   return (
@@ -19,7 +20,10 @@ function AppRoute() {
         <Route path={PATH.HOME} element={<Home />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.SIGNUP} element={<Signup />} />
-        <Route path={PATH.USERSHOME} element={<HomeMain />} />
+
+        <Route path={PATH.USERSHOME} element={<ProtectedRoute>
+        <HomeMain/>
+        </ProtectedRoute>} />
         <Route
           path={PATH.LOADERADDS}
           element={
@@ -63,6 +67,8 @@ function AppRoute() {
             </ProtectedRoute>
           }
         />
+
+        <Route path={PATH.UNAUTHORIZED} element={<UnAuthorized/>} />
       </Routes>
     </div>
   );

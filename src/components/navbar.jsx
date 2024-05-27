@@ -28,6 +28,7 @@ function NavbarComponent() {
         ) : (
           ""
         )}
+         <Link to={PATH.USERSHOME}>Post Add</Link>
         <Link to={PATH.LOGIN}>Login</Link>
         <Link to={PATH.SIGNUP}>Signup</Link>
         <Link to="#">Whyus</Link>

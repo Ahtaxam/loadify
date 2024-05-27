@@ -3,10 +3,15 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikController from "../../../components/formik/formikController";
 import Button from "../../../components/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PATH } from "../../../utils/path";
+import { useLoginUserMutation } from '../../../redux/api/user';
+import { storeCurrentUser } from '../../../utils/currentUser';
+import { toast } from 'react-toastify';
 
 function Login() {
+  const [loginUser, {isLoading} ] = useLoginUserMutation();
+  const navigate = useNavigate();
   const initialValues = {
     email: "",
     password: "",
@@ -17,8 +22,22 @@ function Login() {
     password: Yup.string().required("Password is required").min(8),
   });
 
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = async (values) => {
+    try {
+      const { message, data, token } = await loginUser(values).unwrap();
+      toast.success(message);
+      storeCurrentUser({ ...data, token });
+      if (data?.role === "Truck Loader") {
+        navigate(PATH.LOADERADDS);
+        return;
+      } else {
+        navigate(PATH.INVENTORYADD);
+        return;
+      }
+    } catch (error) {
+      toast.error(error?.data?.message);
+      console.log(error);
+    }
   };
 
   return (
@@ -47,7 +66,7 @@ function Login() {
               />
 
               <Button type="submit" className="w-full">
-                Login
+                {isLoading ? "Logging...":"Login"}
               </Button>
               <p className="text-sm text-right">
                 Don't have an account?{" "}

@@ -1,4 +1,4 @@
-const KEY = "user";
+const KEY = 'user';
 export const storeCurrentUser = (data) => {
   sessionStorage.setItem(KEY, JSON.stringify(data));
 };
@@ -15,4 +15,8 @@ export const getUserRole = () => {
 export const getToken = () => {
   const user = JSON.parse(sessionStorage.getItem(KEY));
   return user?.token;
+};
+
+export const logoutCurrentUser = () => {
+  sessionStorage.removeItem(KEY);
 };
