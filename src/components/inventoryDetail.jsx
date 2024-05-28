@@ -1,60 +1,87 @@
-import React from "react";
-import ImageCarousel from "./imageCarousel";
-import Button from "./button";
+import React from 'react';
+import ImageCarousel from './imageCarousel';
+import Button from './button';
+import { useParams } from 'react-router-dom';
+import { useGetSingleInventoryQuery } from '../redux/api/inventoryAdd';
+import SpinnerComponent from './spinner';
 
 const Images = [
-    "https://picsum.photos/150/?random1",
-    "https://picsum.photos/150/?random2",
-    "https://picsum.photos/150/?random3",
-    "https://picsum.photos/150/?random4"
-]
+  'https://picsum.photos/150/?random1',
+  'https://picsum.photos/150/?random2',
+  'https://picsum.photos/150/?random3',
+  'https://picsum.photos/150/?random4',
+];
 
 function InventoryDetail() {
+  const { id } = useParams();
+  const { data, isLoading } = useGetSingleInventoryQuery(id);
+  console.log(data);
+  const {
+    inventoryType = '',
+    inventorySize = '',
+    inventoryWeight = 0,
+    ownerName = '',
+    phoneNumber = '',
+    location = '',
+    countryName = '',
+    stateName = '',
+    city = '',
+    inventoryPicture = [],
+  } = data?.data || {};
+
   return (
-    <div className="shadow-xl w-[80%] mx-auto p-4 mt-8">
-      <p className="text-center text-xl font-bold">Inventory Detail</p>
-      <div className="flex justify-end">
-        <Button className="bg-navy w-[100px] hover:bg-white hover:text-black hover:border-2 hover:border-dotted">Chat</Button>
-      </div>
-      <div className="flex justify-between flex-wrap p-4">
-        <p>
-          <span className="font-bold">Type: </span> BAG
-        </p>
-        <p>
-          <span className="font-bold">Size: </span> Medium
-        </p>
-        <p>
-          <span className="font-bold">Weight: </span> 5kg
-        </p>
-      </div>
+    <>
+      {isLoading ? (
+        <SpinnerComponent />
+      ) : (
+        <div className='shadow-xl w-[80%] mx-auto p-4 mt-8'>
+          <p className='text-center text-xl font-bold'>Inventory Detail</p>
+          <div className='flex justify-end'>
+            <Button className='bg-navy w-[100px] hover:bg-white hover:text-black hover:border-2 hover:border-dotted'>
+              Chat
+            </Button>
+          </div>
+          <div className='flex justify-between flex-wrap p-4'>
+            <p>
+              <span className='font-bold'>Type: </span> {inventoryType}
+            </p>
+            <p>
+              <span className='font-bold'>Size: </span> {inventorySize}
+            </p>
+            <p>
+              <span className='font-bold'>Weight: </span> {inventoryWeight}
+            </p>
+          </div>
 
-      <div className="flex justify-between flex-wrap p-4">
-        <p>
-          <span className="font-bold">Owner Name: </span> Ahmed Khan
-        </p>
-        <p>
-          <span className="font-bold">Phone Number: </span> 6547865348765
-        </p>
-      </div>
-      <p className="p-4">
-        <span className="font-bold">Location: </span>
-        MAO College, near jain mandir, Lahore, punjab
-      </p>
+          <div className='flex justify-between flex-wrap p-4'>
+            <p>
+              <span className='font-bold'>Owner Name: </span> {ownerName}
+            </p>
+            <p>
+              <span className='font-bold'>Phone Number: </span> {phoneNumber}
+            </p>
+          </div>
+          <p className='p-4'>
+            <span className='font-bold'>Location: </span>
+            {location}
+          </p>
 
-      <div className="flex justify-between flex-wrap p-4">
-        <p>
-          <span className="font-bold">Country: </span> Pakistan
-        </p>
-        <p>
-          <span className="font-bold">State: </span> Punjab
-        </p>
-        <p>
-          <span className="font-bold">City: </span> Lahore
-        </p>
-      </div>
-      <p className="p-4 font-bold">Inventory Images</p>
-      <ImageCarousel data={Images}/>
-    </div>
+          <div className='flex justify-between flex-wrap p-4'>
+            <p>
+              <span className='font-bold'>Country: </span> {countryName}
+            </p>
+            <p>
+              <span className='font-bold'>State: </span> {stateName}
+            </p>
+            <p>
+              <span className='font-bold'>City: </span> {city}
+            </p>
+          </div>
+          <p className='p-4 font-bold'>Inventory Images</p>
+          <ImageCarousel data={inventoryPicture} />
+        </div>
+      )}
+    </>
   );
 }
 

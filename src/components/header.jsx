@@ -31,7 +31,7 @@ function Header() {
     <>
       <ModalCustom open={openModal} setOpen={setOpenModal}>
         <p className="text-center text-2xl font-bold">Post an Add</p>
-        {role === "Truck Loader" ? <PostAdd /> : <InventoryAdd />}
+        {role === "Truck Loader" ? <PostAdd closeModel={() => setOpenModal(false)}/> : <InventoryAdd closeModel={() => setOpenModal(false)}/>}
       </ModalCustom>
       <Navbar fluid rounded>
         <Link to={PATH.HOME} className="flex">

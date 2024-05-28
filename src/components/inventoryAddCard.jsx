@@ -5,19 +5,12 @@ import { PATH } from "../utils/path";
 import { toast } from "react-toastify";
 
 function InventoryAddCard({ data }) {
-  const { inventoryPicture, inventorySize,inventoryType, countryName, city } = data;
+  const {_id, inventoryPicture, inventorySize,inventoryType, countryName, city } = data;
   const navigate = useNavigate();
   const role = getUserRole();
   const handleInventoryAdd = () => {
     console.log("CLICKED: ", role);
-    navigate(`${PATH.SHOWINVENTORYDETAIL}/2`)
-
-    // if(role === "Truck Loader"){
-    //   navigate(`${PATH.SHOWINVENTORYDETAIL}/2`)
-    // }
-    // else {
-    //   toast.error("You are unAuthorized to View This Add")
-    // }
+    navigate(`${PATH.SHOWINVENTORYDETAIL}/${_id}`)
   }
 
   return (

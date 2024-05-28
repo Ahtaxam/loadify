@@ -9,7 +9,7 @@ function InventoryCard({ data, onClick }) {
     countryName,
     city,
     location,
-  } = data;
+  } = data||{};
 
   return (
     <div onClick={onClick} className="cursor-pointer">

@@ -103,6 +103,7 @@ const UploadImage = ({
           onChange={handleFileChange}
           className="hidden"
           id={`upload-${name}`}
+          
         />
         <label htmlFor={`upload-${name}`} className="cursor-pointer">
           <div className="border-dashed border-2 border-gray-300 p-4 h-36 flex items-center justify-center">
