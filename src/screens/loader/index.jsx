@@ -16,7 +16,7 @@ function TruckLoader() {
     <div>
       <AddsScreenHeader />
       <Typography className="m-4">All Inventories</Typography>
-      <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 justify-items-center py-4 px-2">
+      <div className="grid sm:grid-cols-3 grid-cols-1 gap-4 justify-items-center py-4 px-2">
         {INVENTORYADD.map((obj, i) => (
           <InventoryCard data={obj} key={i} onClick={handleInventoryDetail} />
         ))}

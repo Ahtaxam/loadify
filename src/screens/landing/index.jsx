@@ -5,8 +5,12 @@ import { INVENTORYADD, TRUCKADD } from "../../utils/data";
 import Footer from "../../components/footer";
 
 import SwiperComponent from "../../components/swiper";
+import { useGetAllLoadersQuery } from '../../redux/api/truckadd';
+import { useGetAllInventoryQuery } from '../../redux/api/inventoryAdd';
 
 function Home() {
+  const {data,isLoading} = useGetAllLoadersQuery();
+  const {data:inventoryData} = useGetAllInventoryQuery();
   return (
     <>
       <Navbar />
@@ -30,9 +34,9 @@ function Home() {
         </div>
       </div>
 
-      <SwiperComponent text="Truck Add" type="truck" data={TRUCKADD} />
+      <SwiperComponent text="Truck Add" type="truck" data={data?.data || []} isLoading={isLoading} />
 
-      <SwiperComponent text="Inventory Add" type="inventory" data={INVENTORYADD} />
+      <SwiperComponent text="Inventory Add" type="inventory" data={inventoryData?.data||[]} isLoading={isLoading}/>
 
       <Footer />
     </>
