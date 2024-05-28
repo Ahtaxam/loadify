@@ -38,7 +38,6 @@ function Signup() {
     setFieldValue("role", name);
   };
   const handleSubmit = async (values) => {
-    console.log(values);
     try {
       const { message, data, token } = await createUser(values).unwrap();
       toast.success(message);

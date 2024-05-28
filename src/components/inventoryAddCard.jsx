@@ -9,7 +9,6 @@ function InventoryAddCard({ data }) {
   const navigate = useNavigate();
   const role = getUserRole();
   const handleInventoryAdd = () => {
-    console.log("CLICKED: ", role);
     navigate(`${PATH.SHOWINVENTORYDETAIL}/${_id}`)
   }
 

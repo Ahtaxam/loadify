@@ -6,11 +6,14 @@ import LoaderCard from '../../components/loaderCard';
 import Typography from '../../components/typography';
 import { useGetAllLoadersQuery } from '../../redux/api/truckadd';
 import LoaderCardSkeleton from '../../shimmer/loaders';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '../../utils/path';
 
 function InventoryHolder() {
   const { data, isLoading } = useGetAllLoadersQuery();
-  const handleLoaderDetail = () => {
-    console.log('CLICKED');
+  const navigate = useNavigate();
+  const handleLoaderDetail = (id) => {
+    navigate(`${PATH.SHOWLOADERDETAIL}/${id}`)
   };
   return (
     <div>
@@ -23,7 +26,7 @@ function InventoryHolder() {
               <LoaderCardSkeleton key={i} />
             ))
           : data?.data.map((obj, i) => (
-              <LoaderCard data={obj} key={i} onClick={handleLoaderDetail} />
+              <LoaderCard data={obj} key={i} onClick={() => handleLoaderDetail(obj?._id)} />
             ))}
       </div>
     </div>

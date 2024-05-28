@@ -23,7 +23,6 @@ function Header() {
   };
 
   const handleSignOut = () => {
-    console.log("CLICKED");
     logoutCurrentUser();
     navigate(PATH.HOME)
   }

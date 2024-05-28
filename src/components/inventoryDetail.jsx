@@ -5,17 +5,9 @@ import { useParams } from 'react-router-dom';
 import { useGetSingleInventoryQuery } from '../redux/api/inventoryAdd';
 import SpinnerComponent from './spinner';
 
-const Images = [
-  'https://picsum.photos/150/?random1',
-  'https://picsum.photos/150/?random2',
-  'https://picsum.photos/150/?random3',
-  'https://picsum.photos/150/?random4',
-];
-
 function InventoryDetail() {
   const { id } = useParams();
   const { data, isLoading } = useGetSingleInventoryQuery(id);
-  console.log(data);
   const {
     inventoryType = '',
     inventorySize = '',

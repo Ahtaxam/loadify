@@ -6,12 +6,11 @@ import { getUserRole } from '../utils/currentUser';
 // import {Image} from "flowbite-react";
 
 function TruckAddCard({ data }) {
-  const { vehiclePicture, vehicleName, vehicleType, countryName, city } = data||{};
+  const { _id, vehiclePicture, vehicleName, vehicleType, countryName, city } = data||{};
   const navigate = useNavigate();
   const role = getUserRole();
   const handleTruckAddDetail = () => {
-    console.log('CLICKED: ', role);
-    navigate(`${PATH.SHOWLOADERDETAIL}/2`);
+    navigate(`${PATH.SHOWLOADERDETAIL}/${_id}`);
   };
 
   return (
