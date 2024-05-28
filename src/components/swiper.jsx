@@ -7,43 +7,50 @@ import 'swiper/css/navigation';
 
 import TruckAddCard from './truckAddCard';
 import InventoryAddCard from './inventoryAddCard';
+import TruckAddCardSkeleton from '../shimmer/landingPage';
 
-function SwiperComponent({ data, text, type }) {
+function SwiperComponent({ data, text, type, isLoading }) {
   return (
     <>
       <p className='text-2xl pl-8'>{text}</p>
       <div className=' p-8'>
         <Swiper
           modules={[Navigation]}
-          spaceBetween={10}
+          spaceBetween={20}
           navigation={true}
           breakpoints={{
             320: {
               slidesPerView: 1,
             },
-            480: {
+            640: {
               slidesPerView: 2,
             },
-            640: {
+            768: {
               slidesPerView: 3,
             },
-            768: {
+            1024: {
               slidesPerView: 4,
             },
-            1024: {
+            1250: {
               slidesPerView: 5,
             },
           }}
         >
-          {data.map((data, index) => (
-            <SwiperSlide key={index}>
-              {type === 'truck' ? (
-                <TruckAddCard data={data} />
-              ) : (
-                <InventoryAddCard data={data} />
-              )}
-            </SwiperSlide>
-          ))}
+          {isLoading
+            ? Array.from({ length: 5 }).map((_, index) => (
+                <SwiperSlide key={index}>
+                  <TruckAddCardSkeleton />
+                </SwiperSlide>
+              ))
+            : data.map((data, index) => (
+                <SwiperSlide key={index}>
+                  {type === 'truck' ? (
+                    <TruckAddCard data={data} />
+                  ) : (
+                    <InventoryAddCard data={data} />
+                  )}
+                </SwiperSlide>
+              ))}
         </Swiper>
       </div>
     </>
