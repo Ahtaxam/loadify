@@ -28,13 +28,13 @@ function LoaderDetail() {
       ) : (
         <div className='shadow-xl w-[80%] mx-auto p-4 mt-8'>
           <p className='text-center text-xl font-bold'>Loader Detail</p>
-          <div className='flex justify-end gap-4'>
+          <div className='flex justify-end'>
             <Button className='bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white '>
               Chat
             </Button>
-            <Button className='bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white '>
+            {/* <Button className='bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white '>
               Hire
-            </Button>
+            </Button> */}
           </div>
           <div className='flex justify-between flex-wrap p-4 gap-4'>
             <p>
