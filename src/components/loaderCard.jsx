@@ -14,7 +14,7 @@ function LoaderCard({ data, onClick }) {
   return (
     <div onClick={onClick} className='cursor-pointer'>
       <Card className='max-w-sm' imgSrc={vehiclePicture[0]} horizontal>
-        <h5 className='tracking-tight text-gray-900 dark:text-white flex justify-between'>
+        <h5 className='tracking-tight text-gray-900 dark:text-white flex flex-col gap-4'>
           <p>
             <span className='font-bold text-base'>Type:</span> {vehicleName}
           </p>
@@ -26,7 +26,7 @@ function LoaderCard({ data, onClick }) {
           <span className='font-bold'> Location:</span> {location}
         </p>
 
-        <h5 className='tracking-tight text-gray-900 dark:text-white flex justify-between'>
+        <h5 className='tracking-tight text-gray-900 dark:text-white flex flex-col gap-4'>
           <p>
             <span className='font-bold text-base'>Country:</span> {countryName}
           </p>
