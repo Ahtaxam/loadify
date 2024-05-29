@@ -28,12 +28,15 @@ function LoaderDetail() {
       ) : (
         <div className='shadow-xl w-[80%] mx-auto p-4 mt-8'>
           <p className='text-center text-xl font-bold'>Loader Detail</p>
-          <div className='flex justify-end'>
-            <Button className='bg-navy w-[100px] hover:bg-white hover:text-black hover:border-2 hover:border-dotted'>
+          <div className='flex justify-end gap-4'>
+            <Button className='bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white '>
               Chat
             </Button>
+            <Button className='bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white '>
+              Hire
+            </Button>
           </div>
-          <div className='flex justify-between flex-wrap p-4'>
+          <div className='flex justify-between flex-wrap p-4 gap-4'>
             <p>
               <span className='font-bold'>Vehicle Name: </span> {vehicleName}
             </p>
@@ -45,7 +48,7 @@ function LoaderDetail() {
             </p>
           </div>
 
-          <div className='flex justify-between flex-wrap p-4'>
+          <div className='flex justify-between flex-wrap p-4 gap-4'>
             <p>
               <span className='font-bold'>Owner Name: </span> {ownerName}
             </p>
@@ -58,7 +61,7 @@ function LoaderDetail() {
             {location}
           </p>
 
-          <div className='flex justify-between flex-wrap p-4'>
+          <div className='flex justify-between flex-wrap p-4 gap-4'>
             <p>
               <span className='font-bold'>Country: </span> {countryName}
             </p>
