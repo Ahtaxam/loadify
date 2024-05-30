@@ -27,7 +27,7 @@ function NavbarComponent() {
           Loadify
         </span>
       </Navbar.Brand>
-      <Navbar.Toggle />
+     {!user && <Navbar.Toggle />}
       {user && (
         <div className='flex md:order-2 gap-4 items-center'>
           <Dropdown
