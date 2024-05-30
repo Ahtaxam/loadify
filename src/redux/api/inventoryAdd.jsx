@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getToken } from '../../utils/currentUser';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-const token = getToken();
 
 export const inventoryAddApi = createApi({
   reducerPath: 'inventoryAddApi',
@@ -15,13 +14,8 @@ export const inventoryAddApi = createApi({
 
     getSingleInventory: builder.query({
       query: (id) => ({
-        url:`/inventory/${id}`,
-        headers:{
-            Authorization: `Bearer ${token}`,
-
-        }
+        url: `/inventory/${id}`,
       }),
-      
     }),
   }),
 });
