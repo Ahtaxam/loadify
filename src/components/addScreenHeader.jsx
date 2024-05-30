@@ -27,7 +27,7 @@ function AddsScreenHeader() {
             Loadify
           </span>
         </Link>
-        <div className='flex md:order-2 gap-4 items-center'>
+        {user && <div className='flex md:order-2 gap-4 items-center'>
           <Dropdown
             arrowIcon={false}
             inline
@@ -41,10 +41,10 @@ function AddsScreenHeader() {
           >
             <Dropdown.Header>
               <span className='block text-sm mb-2'>
-                {user.firstName} {user.lastName}{' '}
+                {user?.firstName} {user?.lastName}{' '}
               </span>
               <span className='block truncate text-sm font-medium'>
-                {user.email}
+                {user?.email}
               </span>
             </Dropdown.Header>
             <Dropdown.Divider />
@@ -57,7 +57,7 @@ function AddsScreenHeader() {
           </Dropdown>
 
           <Navbar.Toggle />
-        </div>
+        </div>}
         <Navbar.Collapse>
           <Link to={PATH.HOME}>Home</Link>
           <Link to='#'>About</Link>
