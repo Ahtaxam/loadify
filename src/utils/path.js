@@ -4,8 +4,8 @@ export const PATH = {
     SIGNUP:"/signup",
     USERSHOME:"/postadds",
     
-    LOADERADDS:"/truckloader",
-    INVENTORYADD:"/inventory",
+    LOADERADDS:"/inventories",
+    INVENTORYADD:"/loaders",
 
     INVENTORYDETAIL:"/inventory/detail/:id",
     SHOWINVENTORYDETAIL:"/inventory/detail",
