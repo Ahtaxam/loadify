@@ -8,6 +8,7 @@ import { PATH } from "../../utils/path";
 import Typography from '../../components/typography';
 import { useGetAllInventoryQuery } from "../../redux/api/inventoryAdd";
 import LoaderCardSkeleton from "../../shimmer/loaders";
+import NavbarComponent from '../../components/navbar';
 
 function TruckLoader() {
   const {data,isLoading} = useGetAllInventoryQuery();
@@ -17,7 +18,8 @@ function TruckLoader() {
   };
   return (
     <div>
-      <AddsScreenHeader />
+      {/* <AddsScreenHeader /> */}
+      <NavbarComponent/>
       <Typography className="m-4">All Inventories</Typography>
 
       <div className='grid 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 justify-items-center py-4 px-2 flex-wrap'>

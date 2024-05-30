@@ -8,6 +8,7 @@ import { useGetAllLoadersQuery } from '../../redux/api/truckadd';
 import LoaderCardSkeleton from '../../shimmer/loaders';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../../utils/path';
+import NavbarComponent from '../../components/navbar';
 
 function InventoryHolder() {
   const { data, isLoading } = useGetAllLoadersQuery();
@@ -17,7 +18,8 @@ function InventoryHolder() {
   };
   return (
     <div>
-      <AddsScreenHeader />
+      {/* <AddsScreenHeader /> */}
+      <NavbarComponent/>
       <Typography className='m-4'>All Loaders</Typography>
 
       <div className='grid 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 justify-items-center py-4 px-2 flex-wrap'>
