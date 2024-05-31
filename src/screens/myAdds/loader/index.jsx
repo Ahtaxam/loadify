@@ -7,7 +7,6 @@ import { PATH } from '../../../utils/path';
 
 function LoaderPersonalAdds() {
   const { data, isLoading } = useMyPersonalAddsQuery();
-  console.log(data);
   const navigate = useNavigate();
   const handleLoaderDetail = (id) => {
     navigate(`${PATH.SHOWLOADERDETAIL}/${id}`);
@@ -21,7 +20,7 @@ function LoaderPersonalAdds() {
           ? Array.from({ length: 3 }).map((_, i) => (
               <LoaderCardSkeleton key={i} />
             ))
-          : data?.data.map((obj, i) => (
+          : data?.data?.map((obj, i) => (
               <LoaderCard
                 data={obj}
                 key={i}

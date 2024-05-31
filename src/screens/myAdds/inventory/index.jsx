@@ -21,7 +21,7 @@ function InventoryHolderPersonalAdds() {
           ? Array.from({ length: 3 }).map((_, i) => (
               <LoaderCardSkeleton key={i} />
             ))
-          : data?.data.map((obj, i) => (
+          : data?.data?.map((obj, i) => (
               <InventoryCard
                 data={obj}
                 key={i}
