@@ -4,9 +4,12 @@ import Button from './button';
 import { useParams } from 'react-router-dom';
 import SpinnerComponent from './spinner';
 import {  useGetSingleLoaderQuery } from '../redux/api/truckadd';
+import { getCurrentUser, getUserRole } from '../utils/currentUser';
 
 function LoaderDetail() {
   const { id } = useParams();
+  const user = getCurrentUser();
+  const role = getUserRole();
   const { data, isLoading } = useGetSingleLoaderQuery(id);
   const {
     vehicleName = '',
@@ -28,14 +31,14 @@ function LoaderDetail() {
       ) : (
         <div className='shadow-xl w-[80%] mx-auto p-4 mt-8'>
           <p className='text-center text-xl font-bold'>Loader Detail</p>
-          <div className='flex justify-end'>
+          {user && role === "Inventory" && <div className='flex justify-end'>
             <Button className='bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white '>
               Chat
             </Button>
             {/* <Button className='bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white '>
               Hire
             </Button> */}
-          </div>
+          </div>}
           <div className='flex justify-between flex-wrap p-4 gap-4'>
             <p>
               <span className='font-bold'>Vehicle Name: </span> {vehicleName}

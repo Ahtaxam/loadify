@@ -4,9 +4,12 @@ import Button from './button';
 import { useParams } from 'react-router-dom';
 import { useGetSingleInventoryQuery } from '../redux/api/inventoryAdd';
 import SpinnerComponent from './spinner';
+import { getCurrentUser, getUserRole } from '../utils/currentUser';
 
 function InventoryDetail() {
   const { id } = useParams();
+  const user = getCurrentUser();
+  const role = getUserRole();
   const { data, isLoading } = useGetSingleInventoryQuery(id);
   const {
     inventoryType = '',
@@ -28,11 +31,11 @@ function InventoryDetail() {
       ) : (
         <div className='shadow-xl w-[80%] mx-auto p-4 mt-8'>
           <p className='text-center text-xl font-bold'>Inventory Detail</p>
-          <div className='flex justify-end'>
+          {user && role === "Truck Loader" && <div className='flex justify-end'>
             <Button className='bg-navy w-[100px] hover:bg-white hover:text-black hover:border-2 hover:border-dotted'>
               Chat
             </Button>
-          </div>
+          </div>}
           <div className='flex justify-between flex-wrap p-4'>
             <p>
               <span className='font-bold'>Type: </span> {inventoryType}
