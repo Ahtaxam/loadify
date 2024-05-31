@@ -12,6 +12,7 @@ import RoleRoute from './RoleRoute';
 import InventoryHolder from '../screens/inventory';
 import LoaderDetail from '../components/loaderDetail';
 import UnAuthorized from '../screens/unAuthorized';
+import LoaderPersonalAdds from '../screens/myAdds/loader';
 
 function AppRoute() {
   return (
@@ -35,6 +36,18 @@ function AppRoute() {
         <Route path={PATH.INVENTORYADD} element={<InventoryHolder />} />
 
         <Route path={PATH.LOADERDETAIL} element={<LoaderDetail />} />
+
+        <Route 
+        path={PATH.LOADERMYADDS}
+        element={
+          <ProtectedRoute>
+            <RoleRoute roles={['Truck Loader']}>
+              <LoaderPersonalAdds/>
+            </RoleRoute>
+          </ProtectedRoute>
+        }
+        
+        />
 
         <Route path={PATH.UNAUTHORIZED} element={<UnAuthorized />} />
       </Routes>
