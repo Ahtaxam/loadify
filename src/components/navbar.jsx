@@ -71,7 +71,7 @@ function NavbarComponent() {
 
         {user && (
           <>
-            <Link to={PATH.HOME}>My Post</Link>
+            <Link to={role === "Truck Loader" ?PATH.LOADERPERSONALADDS :PATH.INVENTORYPERSONALADDS}>My Adds</Link>
             <Link as={Link} href='#'>
               Active Order
             </Link>
