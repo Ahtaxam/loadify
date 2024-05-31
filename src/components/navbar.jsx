@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../assets/images/logo.png';
-import { Navbar, Dropdown, Avatar } from 'flowbite-react';
+import { Navbar, Dropdown, Avatar, Button } from 'flowbite-react';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { PATH } from '../utils/path';
@@ -27,33 +27,50 @@ function NavbarComponent() {
           Loadify
         </span>
       </Navbar.Brand>
-     {!user && <Navbar.Toggle />}
+      {!user && <Navbar.Toggle />}
       {user && (
-        <div className='flex md:order-2 gap-4 items-center'>
-          <Dropdown
-            arrowIcon={false}
-            inline
-            label={<Avatar alt='User settings' rounded />}
-          >
-            <Dropdown.Header>
-              <span className='block text-sm mb-2'>
-                {user?.firstName} {user?.lastName}{' '}
-              </span>
-              <span className='block truncate text-sm font-medium'>
-                {user?.email}
-              </span>
-            </Dropdown.Header>
-            <Dropdown.Divider />
-            <span className='text-sm font-medium ml-4'>Role: {role}</span>
+        <>
+          <div className='flex md:order-2 gap-4 items-center'>
+            {/* {role === 'Truck Loader' ? (
+              <Button
+                className='bg-navy hover:bg-purple-800'
+                // onClick={handleRegisterVehicle}
+              >
+                Post Truck Add
+              </Button>
+            ) : (
+              <Button
+                className='bg-navy hover:bg-purple-800'
+                // onClick={handlePostingAdd}
+              >
+                Post Inventory Add
+              </Button>
+            )} */}
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={<Avatar alt='User settings' rounded />}
+            >
+              <Dropdown.Header>
+                <span className='block text-sm mb-2'>
+                  {user?.firstName} {user?.lastName}{' '}
+                </span>
+                <span className='block truncate text-sm font-medium'>
+                  {user?.email}
+                </span>
+              </Dropdown.Header>
+              <Dropdown.Divider />
+              <span className='text-sm font-medium ml-4'>Role: {role}</span>
 
-            <Dropdown.Divider />
-            <Dropdown.Item className='text-red-900' onClick={handleSignOut}>
-              Sign out
-            </Dropdown.Item>
-          </Dropdown>
+              <Dropdown.Divider />
+              <Dropdown.Item className='text-red-900' onClick={handleSignOut}>
+                Sign out
+              </Dropdown.Item>
+            </Dropdown>
 
-          <Navbar.Toggle />
-        </div>
+            <Navbar.Toggle />
+          </div>
+        </>
       )}
       <Navbar.Collapse>
         <Link to={PATH.HOME}>Home</Link>
@@ -71,7 +88,16 @@ function NavbarComponent() {
 
         {user && (
           <>
-            <Link to={role === "Truck Loader" ?PATH.LOADERPERSONALADDS :PATH.INVENTORYPERSONALADDS}>My Adds</Link>
+            <Link to={PATH.USERSHOME}>Post Add</Link>
+            <Link
+              to={
+                role === 'Truck Loader'
+                  ? PATH.LOADERPERSONALADDS
+                  : PATH.INVENTORYPERSONALADDS
+              }
+            >
+              My Adds
+            </Link>
             <Link as={Link} href='#'>
               Active Order
             </Link>
