@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getToken } from '../../utils/currentUser';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+const token = getToken();
 
 export const truckAddApi = createApi({
   reducerPath: 'truckAddApi',
@@ -17,7 +18,20 @@ export const truckAddApi = createApi({
         url: `/loader/${id}`,
       }),
     }),
+
+    myPersonalAdds: builder.query({
+      query: () => ({
+        url: '/loader/currentuser',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetAllLoadersQuery, useGetSingleLoaderQuery } = truckAddApi;
+export const {
+  useGetAllLoadersQuery,
+  useGetSingleLoaderQuery,
+  useMyPersonalAddsQuery,
+} = truckAddApi;
