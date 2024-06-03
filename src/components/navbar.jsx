@@ -10,6 +10,33 @@ import {
   logoutCurrentUser,
 } from '../utils/currentUser';
 
+const NAVBARITEMS = [
+  {
+    name: 'Home',
+    path: PATH.HOME,
+  },
+  {
+    name: 'About',
+    path: '/about',
+  },
+  {
+    name: 'Contactus',
+    path: PATH.MYADDS,
+  },
+  {
+    name: 'My Adds',
+    path: PATH.MYADDS,
+  },
+  {
+    name: 'Active Order',
+    path: '/activeorder',
+  },
+  {
+    name: 'Messages',
+    path: '/chat',
+  },
+];
+
 function NavbarComponent() {
   const role = getUserRole();
   const user = getCurrentUser();
@@ -31,21 +58,6 @@ function NavbarComponent() {
       {user && (
         <>
           <div className='flex md:order-2 gap-4 items-center'>
-            {/* {role === 'Truck Loader' ? (
-              <Button
-                className='bg-navy hover:bg-purple-800'
-                // onClick={handleRegisterVehicle}
-              >
-                Post Truck Add
-              </Button>
-            ) : (
-              <Button
-                className='bg-navy hover:bg-purple-800'
-                // onClick={handlePostingAdd}
-              >
-                Post Inventory Add
-              </Button>
-            )} */}
             <Dropdown
               arrowIcon={false}
               inline
@@ -60,7 +72,7 @@ function NavbarComponent() {
                 </span>
               </Dropdown.Header>
               <Dropdown.Divider />
-              <span className='text-sm font-medium ml-4'>Role: {role}</span>
+              {/* <span className='text-sm font-medium ml-4'>Role: {role}</span> */}
 
               <Dropdown.Divider />
               <Dropdown.Item className='text-red-900' onClick={handleSignOut}>
@@ -88,16 +100,7 @@ function NavbarComponent() {
 
         {user && (
           <>
-            <Link to={PATH.USERSHOME}>Post Add</Link>
-            <Link
-              to={
-                role === 'Truck Loader'
-                  ? PATH.LOADERPERSONALADDS
-                  : PATH.INVENTORYPERSONALADDS
-              }
-            >
-              My Adds
-            </Link>
+            <Link to={PATH.MYADDS}>My Adds</Link>
             <Link as={Link} href='#'>
               Active Order
             </Link>
