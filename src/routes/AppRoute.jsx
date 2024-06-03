@@ -14,6 +14,7 @@ import LoaderDetail from '../components/loaderDetail';
 import UnAuthorized from '../screens/unAuthorized';
 import LoaderPersonalAdds from '../screens/myAdds/loader';
 import InventoryHolderPersonalAdds from '../screens/myAdds/inventory';
+import MyAdds from '../screens/myAdds';
 
 function AppRoute() {
   return (
@@ -37,8 +38,9 @@ function AppRoute() {
         <Route path={PATH.INVENTORYADD} element={<InventoryHolder />} />
 
         <Route path={PATH.LOADERDETAIL} element={<LoaderDetail />} />
+        <Route path={PATH.MYADDS} element={<MyAdds/>} />
 
-        <Route
+        {/* <Route
           path={PATH.LOADERPERSONALADDS}
           element={
             <ProtectedRoute>
@@ -58,7 +60,7 @@ function AppRoute() {
               </RoleRoute>
             </ProtectedRoute>
           }
-        />
+        /> */}
 
         <Route path={PATH.UNAUTHORIZED} element={<UnAuthorized />} />
       </Routes>
