@@ -9,10 +9,10 @@ import { useCreateUserMutation } from "../../../redux/api/user";
 import { toast } from "react-toastify";
 import { storeCurrentUser } from "../../../utils/currentUser";
 
-const ROLE = ["Truck Loader", "Inventory"];
+// const ROLE = ["Truck Loader", "Inventory"];
 function Signup() {
   const [createUser, { isLoading }] = useCreateUserMutation();
-  const [selectedRole, setSelectedRole] = useState(ROLE[0]);
+  // const [selectedRole, setSelectedRole] = useState(ROLE[0]);
   const navigate = useNavigate();
   const initialValues = {
     firstName: "",
@@ -21,7 +21,7 @@ function Signup() {
     password: "",
     phoneNumber: "",
     address: "",
-    role: ROLE[0],
+    // role: ROLE[0],
   };
 
   const validationSchema = Yup.object({
@@ -33,10 +33,10 @@ function Signup() {
     password: Yup.string().required("Password is required").min(8),
   });
 
-  const handleSelectedRole = (name, setFieldValue) => {
-    setSelectedRole(name);
-    setFieldValue("role", name);
-  };
+  // const handleSelectedRole = (name, setFieldValue) => {
+  //   setSelectedRole(name);
+  //   setFieldValue("role", name);
+  // };
   const handleSubmit = async (values) => {
     try {
       const { message, data, token } = await createUser(values).unwrap();
@@ -102,7 +102,7 @@ function Signup() {
                 label="Address"
                 name="address"
               />
-              <div className="flex justify-between gap-4">
+              {/* <div className="flex justify-between gap-4">
                 {ROLE.map((name, i) => (
                   <p
                     key={i}
@@ -116,7 +116,7 @@ function Signup() {
                     {name}
                   </p>
                 ))}
-              </div>
+              </div> */}
               <Button type="submit" className="w-full">
                 {isLoading ? "Creating..." : "Signup"}
               </Button>

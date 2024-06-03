@@ -27,13 +27,7 @@ function Login() {
       const { message, data, token } = await loginUser(values).unwrap();
       toast.success(message);
       storeCurrentUser({ ...data, token });
-      if (data?.role === "Truck Loader") {
-        navigate(PATH.LOADERADDS);
-        return;
-      } else {
-        navigate(PATH.INVENTORYADD);
-        return;
-      }
+      navigate(PATH.HOME)
     } catch (error) {
       toast.error(error?.data?.message);
       console.log(error);
