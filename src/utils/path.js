@@ -16,4 +16,6 @@ export const PATH = {
   INVENTORYPERSONALADDS: '/inventory/personal/adds',
 
   UNAUTHORIZED: '/unauthorized',
+
+  MYADDS:"/myadds"
 };
