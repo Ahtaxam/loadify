@@ -48,7 +48,7 @@ function MyAdds() {
       <NavbarComponent />
       <div className='m-4 float-end'>
         <Dropdown label='Post An Add'>
-          {ADDPOSTLABEL.map((obj, i) => (
+          {ADDPOSTLABEL?.map((obj, i) => (
             <Dropdown.Item onClick={() => handlePostAdd(obj)} key={i}>
               {obj}
             </Dropdown.Item>

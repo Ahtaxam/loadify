@@ -59,18 +59,15 @@ function InventoryDetail() {
         <div className="shadow-xl w-[80%] mx-auto p-4 mt-8">
           <p className="text-center text-xl font-bold">Inventory Detail</p>
           <div className="flex justify-end">
-            {postedBy !== user._id ? (
-              <Button className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white ">
+              {user?._id !== postedBy && <Button className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white ">
                 Chat
-              </Button>
-            ) : (
-              <Button
+              </Button>}
+             {user && user?._id === postedBy && <Button
                 className="bg-red-500 w-[100px] "
                 onClick={handleDeleteInventory}
               >
                 {loading ? "Deleting..." : "Delete"}
-              </Button>
-            )}
+              </Button>}
           </div>
           <div className="flex justify-between flex-wrap p-4">
             <p>

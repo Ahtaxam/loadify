@@ -54,14 +54,15 @@ function LoaderDetail() {
         <div className="shadow-xl w-[80%] mx-auto p-4 mt-8">
           <p className="text-center text-xl font-bold">Loader Detail</p>
           <div className="flex justify-end">
-            {postedBy !== user._id ? (
+            {user?._id !== postedBy && (
               <Button className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white ">
                 Chat
               </Button>
-            ) : (
+            )}
+            {user && user?._id === postedBy && (
               <Button
                 className="bg-red-500 w-[100px] "
-                onClick={handleDeleteLoader}
+                onClick={handleDeleteInventory}
               >
                 {loading ? "Deleting..." : "Delete"}
               </Button>
