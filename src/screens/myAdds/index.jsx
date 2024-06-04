@@ -31,7 +31,6 @@ function MyAdds() {
   const handleLoaderDetail = (id) => {
     navigate(`${PATH.SHOWLOADERDETAIL}/${id}`);
   };
-  console.log(addName);
   const handlePostAdd = (name) => {
     setAddName(name)
     setOpenModal(true);
@@ -40,7 +39,6 @@ function MyAdds() {
     <div>
       <ModalCustom open={openModal} setOpen={setOpenModal}>
         <p className='text-center text-2xl font-bold'>Post an Add</p>
-        {console.log(addName, 'INSIDE')}
         {addName === 'Loader' ? (
           <PostAdd closeModel={() => setOpenModal(false)} />
         ) : (
