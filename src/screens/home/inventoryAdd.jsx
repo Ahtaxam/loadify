@@ -15,6 +15,8 @@ import { INVENTORYOPTIONS, OPTIONS } from '../../utils/data';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { getToken } from '../../utils/currentUser';
+import { useDispatch } from 'react-redux';
+import { inventoryAddApi } from '../../redux/api/inventoryAdd';
 
 const { VITE_BASE_URL } = import.meta.env;
 
@@ -24,6 +26,7 @@ function InventoryAdd({ closeModel }) {
   const [cityList, setCityList] = useState([]);
   const [loading, setLoading] = useState(false);
   const token = getToken();
+  const dispatch = useDispatch()
 
   const initialValues = {
     inventorySize: '',
@@ -91,6 +94,7 @@ function InventoryAdd({ closeModel }) {
         setLoading(false);
         closeModel();
         setLoading(false);
+        dispatch(inventoryAddApi.util.invalidateTags(["Inventory"]))
       }
     } catch (error) {
       setLoading(false);
