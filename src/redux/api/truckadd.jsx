@@ -8,11 +8,11 @@ export const truckAddApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
   }),
-  tagTypes: ["Inventory"],
+  tagTypes: ["Truck"],
   endpoints: (builder) => ({
     getAllLoaders: builder.query({
       query: () => "/loader/all",
-      providesTags: ["Inventory"],
+      providesTags: ["Truck"],
     }),
 
     getSingleLoader: builder.query({
@@ -22,12 +22,13 @@ export const truckAddApi = createApi({
     }),
 
     myPersonalAdds: builder.query({
-      query: () => ({
+      query: (authToken) => ({
         url: "/loader/currentuser",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${authToken}`,
         },
       }),
+      providesTags:["Truck"]
     }),
 
     deleteLoader: builder.mutation({
@@ -38,7 +39,7 @@ export const truckAddApi = createApi({
           Authorization: `Bearer ${token}`,
         },
       }),
-      invalidatesTags: ["Inventory"],
+      invalidatesTags: ["Truck"],
     }),
   }),
 });
