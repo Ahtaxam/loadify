@@ -17,5 +17,7 @@ export const PATH = {
 
   UNAUTHORIZED: '/unauthorized',
 
-  MYADDS:"/myadds"
+  MYADDS:"/myadds",
+
+  CHAT:"/chat"
 };
