@@ -46,14 +46,14 @@ function Home() {
       </div>
 
       <SwiperComponent
-        text='Truck Add'
+        text='Truck Adds'
         type='truck'
         data={data?.data || []}
         isLoading={isLoading}
       />
 
       <SwiperComponent
-        text='Inventory Add'
+        text='Inventory Adds'
         type='inventory'
         data={inventoryData?.data || []}
         isLoading={isLoading}
