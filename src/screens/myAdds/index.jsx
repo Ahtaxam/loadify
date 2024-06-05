@@ -10,6 +10,7 @@ import NavbarComponent from '../../components/navbar';
 import { useGetPersonalAddsQuery } from '../../redux/api/inventoryAdd';
 import { useMyPersonalAddsQuery } from '../../redux/api/truckadd';
 import LoaderCardSkeleton from '../../shimmer/loaders';
+import { getToken } from '../../utils/currentUser';
 import { PATH } from '../../utils/path';
 import InventoryAdd from '../home/inventoryAdd';
 import PostAdd from '../home/postAdd';
@@ -17,11 +18,12 @@ import PostAdd from '../home/postAdd';
 const ADDPOSTLABEL = ['Loader', 'Inventory'];
 
 function MyAdds() {
+  const token = getToken();
   const [addName, setAddName] = useState('');
   const [openModal, setOpenModal] = useState(false);
 
-  const { data, isLoading } = useGetPersonalAddsQuery();
-  const { data: LoaderAdds } = useMyPersonalAddsQuery();
+  const { data, isLoading } = useGetPersonalAddsQuery(token);
+  const { data: LoaderAdds } = useMyPersonalAddsQuery(token);
 
   const navigate = useNavigate();
   const handleInventoryDetail = (id) => {
@@ -32,7 +34,7 @@ function MyAdds() {
     navigate(`${PATH.SHOWLOADERDETAIL}/${id}`);
   };
   const handlePostAdd = (name) => {
-    setAddName(name)
+    setAddName(name);
     setOpenModal(true);
   };
   return (
@@ -59,33 +61,45 @@ function MyAdds() {
       <p className='m-4 text-2xl font-inter'>Inventory Adds</p>
 
       <div className='grid 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 justify-items-center py-4 px-2 flex-wrap'>
-        {isLoading
-          ? Array.from({ length: 3 }).map((_, i) => (
-              <LoaderCardSkeleton key={i} />
-            ))
-          : data?.data?.map((obj, i) => (
-              <InventoryCard
-                data={obj}
-                key={i}
-                onClick={() => handleInventoryDetail(obj?._id)}
-              />
-            ))}
+        {isLoading ? (
+          Array.from({ length: 3 }).map((_, i) => (
+            <LoaderCardSkeleton key={i} />
+          ))
+        ) : data?.data.length === 0 ? (
+          <p className='font-inter text-xl '>
+            you have't post any Inventory Add
+          </p>
+        ) : (
+          data?.data?.map((obj, i) => (
+            <InventoryCard
+              data={obj}
+              key={i}
+              onClick={() => handleInventoryDetail(obj?._id)}
+            />
+          ))
+        )}
       </div>
 
       <p className='m-4 text-2xl font-inter'>Loader Adds</p>
 
       <div className='grid 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 justify-items-center py-4 px-2 flex-wrap'>
-        {isLoading
-          ? Array.from({ length: 3 }).map((_, i) => (
-              <LoaderCardSkeleton key={i} />
-            ))
-          : LoaderAdds?.data?.map((obj, i) => (
-              <LoaderCard
-                data={obj}
-                key={i}
-                onClick={() => handleLoaderDetail(obj?._id)}
-              />
-            ))}
+        {isLoading ? (
+          Array.from({ length: 3 }).map((_, i) => (
+            <LoaderCardSkeleton key={i} />
+          ))
+        ) : LoaderAdds?.data.length === 0 ? (
+          <p className='font-inter text-xl '>
+            you have't post any Loader Add
+          </p>
+        ) : (
+          LoaderAdds?.data?.map((obj, i) => (
+            <LoaderCard
+              data={obj}
+              key={i}
+              onClick={() => handleLoaderDetail(obj?._id)}
+            />
+          ))
+        )}
       </div>
     </div>
   );
