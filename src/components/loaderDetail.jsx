@@ -4,6 +4,7 @@ import Button from "./button";
 import { useNavigate, useParams } from "react-router-dom";
 import SpinnerComponent from "./spinner";
 import {
+  truckAddApi,
   useDeleteLoaderMutation,
   useGetSingleLoaderQuery,
 } from "../redux/api/truckadd";
@@ -11,6 +12,8 @@ import { getCurrentUser, getUserRole } from "../utils/currentUser";
 import NavbarComponent from "./navbar";
 import { toast } from "react-toastify";
 import { PATH } from "../utils/path";
+import FooterComponent from './footer';
+import { useDispatch } from 'react-redux';
 
 function LoaderDetail() {
   const { id } = useParams();
@@ -19,6 +22,7 @@ function LoaderDetail() {
   const role = getUserRole();
   const { data, isLoading } = useGetSingleLoaderQuery(id);
   const [deleteLoader, { isLoading: loading }] = useDeleteLoaderMutation();
+  const dispatch = useDispatch();
   const {
     _id = "",
     postedBy = "",
@@ -39,6 +43,7 @@ function LoaderDetail() {
       const { message } = await deleteLoader(_id).unwrap();
       toast.success(message);
       navigate(PATH.MYADDS);
+      dispatch(truckAddApi.util.invalidateTags(["Truck"]))
     } catch (error) {
       console.log(error);
       toast.error("SERVER ERROR");
@@ -51,7 +56,7 @@ function LoaderDetail() {
       {isLoading ? (
         <SpinnerComponent />
       ) : (
-        <div className="shadow-xl w-[80%] mx-auto p-4 mt-8">
+        <div className="shadow-xl w-[80%] mx-auto p-4 my-8">
           <p className="text-center text-xl font-bold">Loader Detail</p>
           <div className="flex justify-end">
             {user?._id !== postedBy && (
@@ -62,7 +67,7 @@ function LoaderDetail() {
             {user && user?._id === postedBy && (
               <Button
                 className="bg-red-500 w-[100px] "
-                onClick={handleDeleteInventory}
+                onClick={handleDeleteLoader}
               >
                 {loading ? "Deleting..." : "Delete"}
               </Button>
@@ -111,6 +116,7 @@ function LoaderDetail() {
           <ImageCarousel data={vehiclePicture} />
         </div>
       )}
+      <FooterComponent/>
     </>
   );
 }

@@ -13,6 +13,7 @@ import NavbarComponent from "./navbar";
 import { toast } from "react-toastify";
 import { PATH } from "../utils/path";
 import { useDispatch } from "react-redux";
+import FooterComponent from './footer';
 
 function InventoryDetail() {
   const { id } = useParams();
@@ -56,7 +57,7 @@ function InventoryDetail() {
       {isLoading ? (
         <SpinnerComponent />
       ) : (
-        <div className="shadow-xl w-[80%] mx-auto p-4 mt-8">
+        <div className="shadow-xl w-[80%] mx-auto p-4 my-8">
           <p className="text-center text-xl font-bold">Inventory Detail</p>
           <div className="flex justify-end">
               {user?._id !== postedBy && <Button className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white ">
@@ -109,6 +110,7 @@ function InventoryDetail() {
           <ImageCarousel data={inventoryPicture} />
         </div>
       )}
+      <FooterComponent/>
     </>
   );
 }

@@ -47,7 +47,7 @@ function NavbarComponent() {
     navigate(PATH.HOME);
   };
   return (
-    <Navbar fluid rounded className='shadow-2xl'>
+    <Navbar fluid rounded className='shadow-2xl p-4'>
       <Navbar.Brand>
         <img src={Logo} className='mr-3 h-6 sm:h-9' alt='Loadify Logo' />
         <span className='self-center whitespace-nowrap text-xl font-semibold dark:text-white'>
@@ -57,7 +57,7 @@ function NavbarComponent() {
       {!user && <Navbar.Toggle />}
       {user && (
         <>
-          <div className='flex md:order-2 gap-4 items-center'>
+          <div className='flex md:order-2 gap-4 items-center '>
             <Dropdown
               arrowIcon={false}
               inline
@@ -85,28 +85,46 @@ function NavbarComponent() {
         </>
       )}
       <Navbar.Collapse>
-        <Link to={PATH.HOME}>Home</Link>
-        <Link as={Link} href='#'>
-          About
-        </Link>
-        <Link to='#'>Contactus</Link>
-        {!user && (
-          <>
-            {' '}
-            <Link to={PATH.LOGIN}>Login</Link>
-            <Link to={PATH.SIGNUP}>Signup</Link>
-          </>
-        )}
+        <div className='flex items-center space-x-6 '>
+          <Link to={PATH.HOME} className='underline-link'>
+            Home
+          </Link>
+          <Link to='#' className='underline-link'>
+            About
+          </Link>
+          <Link to='#' className='underline-link'>
+            Contact us
+          </Link>
+          {!user && (
+            <>
+              {' '}
+              <Link to={PATH.LOGIN}>
+                <button className='bg-[#00215E] text-white p-2 rounded'>
+                  Login
+                </button>
+              </Link>
+              <Link to={PATH.SIGNUP}>
+                <button className='bg-[#00215E] text-white p-2 rounded'>
+                  Signup
+                </button>
+              </Link>
+            </>
+          )}
 
-        {user && (
-          <>
-            <Link to={PATH.MYADDS}>My Adds</Link>
-            <Link as={Link} href='#'>
-              Active Order
-            </Link>
-            <Link to='#'>Messages</Link>
-          </>
-        )}
+          {user && (
+            <>
+              <Link to={PATH.MYADDS} className='underline-link'>
+                My Adds
+              </Link>
+              <Link as={Link} href='#' className='underline-link'>
+                Active Order
+              </Link>
+              <Link to='#' className='underline-link'>
+                Messages
+              </Link>
+            </>
+          )}
+        </div>
       </Navbar.Collapse>
     </Navbar>
   );

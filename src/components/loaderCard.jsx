@@ -16,10 +16,10 @@ function LoaderCard({ data, onClick }) {
       <Card className='max-w-sm' imgSrc={vehiclePicture[0]} horizontal>
         <h5 className='tracking-tight text-gray-900 dark:text-white flex flex-col gap-4'>
           <p>
-            <span className='font-bold text-base'>Type:</span> {vehicleName}
+            <span className='font-bold text-base'>Name:</span> {vehicleName}
           </p>
           <p>
-            <span className='font-bold text-base'>Size:</span> {vehicleType}
+            <span className='font-bold text-base'>Type:</span> {vehicleType}
           </p>
         </h5>
         <p className='font-normal text-gray-700 dark:text-gray-400'>

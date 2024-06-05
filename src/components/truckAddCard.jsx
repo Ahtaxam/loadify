@@ -20,7 +20,7 @@ function TruckAddCard({ data }) {
     >
       <img
         src={vehiclePicture[0]}
-        className='shadow rounded-lg overflow-hidden border'
+        className='shadow rounded-lg overflow-hidden border w-full h-[200px] object-cover'
       />
       <div className='mt-8'>
         <div className=''>
