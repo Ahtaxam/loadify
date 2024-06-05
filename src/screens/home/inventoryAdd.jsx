@@ -98,8 +98,8 @@ function InventoryAdd({ closeModel }) {
       }
     } catch (error) {
       setLoading(false);
-      toast.error('ERROR: ');
-      console.log(error);
+      toast.error(error?.response?.data?.message || 'SERVER ERROR: ');
+      console.log(error.response.data.message);
     }
   };
 

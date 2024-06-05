@@ -19,6 +19,8 @@ import { OPTIONS } from '../../utils/data';
 import { getToken } from '../../utils/currentUser';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { truckAddApi } from '../../redux/api/truckadd';
 
 const { VITE_BASE_URL } = import.meta.env;
 
@@ -29,6 +31,7 @@ function PostAdd({closeModel}) {
   const [cityList, setCityList] = useState([]);
   const [loading, setLoading] = useState(false);
   const token = getToken();
+  const dispatch = useDispatch();
 
   const initialValues = {
     vehicleName: '',
@@ -115,10 +118,11 @@ function PostAdd({closeModel}) {
         toast.success(result.data.message);
         setLoading(false);
         closeModel();
+        dispatch(truckAddApi.util.invalidateTags(["Truck"]))
       }
     } catch (error) {
       setLoading(false);
-      toast.error("ERROR: ")
+      toast.error(error?.response?.data?.message || 'SERVER ERROR: ')
       console.log(error);
     }
   };
