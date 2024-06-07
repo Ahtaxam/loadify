@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { PATH } from "../utils/path";
 import FooterComponent from './footer';
 import { useDispatch } from 'react-redux';
+import useConversation from "../zustand/userConversation";
 
 function LoaderDetail() {
   const { id } = useParams();
@@ -23,9 +24,10 @@ function LoaderDetail() {
   const { data, isLoading } = useGetSingleLoaderQuery(id);
   const [deleteLoader, { isLoading: loading }] = useDeleteLoaderMutation();
   const dispatch = useDispatch();
+  const  {setSelectedConversation} = useConversation();
   const {
     _id = "",
-    postedBy = "",
+    postedBy = {},
     vehicleName = "",
     vehicleModel = "",
     vehicleNumber = 0,
@@ -50,6 +52,10 @@ function LoaderDetail() {
     }
   };
 
+  const handleChat = () => {
+    setSelectedConversation(postedBy)
+    navigate(PATH.CHAT)
+  }
   return (
     <>
       <NavbarComponent />
@@ -59,12 +65,12 @@ function LoaderDetail() {
         <div className="shadow-xl w-[80%] mx-auto p-4 my-8">
           <p className="text-center text-xl font-bold">Loader Detail</p>
           <div className="flex justify-end">
-            {user?._id !== postedBy && (
-              <Button className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white ">
+            {user?._id !== postedBy._id && (
+              <Button className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white " onClick={handleChat}>
                 Chat
               </Button>
             )}
-            {user && user?._id === postedBy && (
+            {user && user?._id === postedBy._id && (
               <Button
                 className="bg-red-500 w-[100px] "
                 onClick={handleDeleteLoader}

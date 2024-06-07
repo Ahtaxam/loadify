@@ -15,7 +15,7 @@ import UnAuthorized from '../screens/unAuthorized';
 import LoaderPersonalAdds from '../screens/myAdds/loader';
 import InventoryHolderPersonalAdds from '../screens/myAdds/inventory';
 import MyAdds from '../screens/myAdds';
-import Chat from '../screens/chat';
+import Chat from '../screens/chat/index';
 
 function AppRoute() {
   return (
@@ -41,7 +41,11 @@ function AppRoute() {
         <Route path={PATH.LOADERDETAIL} element={<LoaderDetail />} />
         <Route path={PATH.MYADDS} element={<MyAdds/>} />
 
-        <Route path={PATH.CHAT} element={<Chat/>} />
+        <Route path={PATH.CHAT} element={
+          <ProtectedRoute>
+            <Chat/>
+          </ProtectedRoute>
+        } />
 
         {/* <Route
           path={PATH.LOADERPERSONALADDS}
