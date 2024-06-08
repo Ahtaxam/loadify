@@ -40,6 +40,7 @@ function InventoryDetail() {
     stateName = "",
     city = "",
     inventoryPicture = [],
+    status = "",
   } = data?.data || {};
 
   const handleDeleteInventory = async () => {
@@ -76,13 +77,19 @@ function InventoryDetail() {
                 Chat
               </Button>
             )}
-            {user && user?._id === postedBy?._id && (
+            {user && user?._id === postedBy?._id && status === "posted" ? (
               <Button
-                className="bg-red-500 w-[100px] "
+                className="bg-red-500 w-[100px]"
                 onClick={handleDeleteInventory}
               >
                 {loading ? "Deleting..." : "Delete"}
               </Button>
+            ) : (
+              user?._id === postedBy?._id && (
+                <p className="bg-navy px-4 py-2 text-white rounded-lg">
+                  {status}
+                </p>
+              )
             )}
           </div>
           <div className="flex justify-between flex-wrap p-4">

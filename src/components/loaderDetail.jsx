@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ImageCarousel from "./imageCarousel";
 import Button from "./button";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,11 +12,14 @@ import { getCurrentUser, getUserRole } from "../utils/currentUser";
 import NavbarComponent from "./navbar";
 import { toast } from "react-toastify";
 import { PATH } from "../utils/path";
-import FooterComponent from './footer';
-import { useDispatch } from 'react-redux';
+import FooterComponent from "./footer";
+import { useDispatch } from "react-redux";
 import useConversation from "../zustand/userConversation";
+import ModalCustom from "./modal";
+import Inventories from "../screens/bookLoader";
 
 function LoaderDetail() {
+  const [openModal, setOpenModal] = useState(false);
   const { id } = useParams();
   const user = getCurrentUser();
   const navigate = useNavigate();
@@ -24,7 +27,7 @@ function LoaderDetail() {
   const { data, isLoading } = useGetSingleLoaderQuery(id);
   const [deleteLoader, { isLoading: loading }] = useDeleteLoaderMutation();
   const dispatch = useDispatch();
-  const  {setSelectedConversation} = useConversation();
+  const { setSelectedConversation } = useConversation();
   const {
     _id = "",
     postedBy = {},
@@ -45,7 +48,7 @@ function LoaderDetail() {
       const { message } = await deleteLoader(_id).unwrap();
       toast.success(message);
       navigate(PATH.MYADDS);
-      dispatch(truckAddApi.util.invalidateTags(["Truck"]))
+      dispatch(truckAddApi.util.invalidateTags(["Truck"]));
     } catch (error) {
       console.log(error);
       toast.error("SERVER ERROR");
@@ -53,20 +56,31 @@ function LoaderDetail() {
   };
 
   const handleChat = () => {
-    setSelectedConversation(postedBy)
-    navigate(PATH.CHAT)
-  }
+    setSelectedConversation(postedBy);
+    navigate(PATH.CHAT);
+  };
+
+  const handleBookLoader = () => {
+    setOpenModal(true);
+    console.log("booked");
+  };
   return (
     <>
+      <ModalCustom open={openModal} setOpen={() => setOpenModal(!openModal)}>
+        <Inventories closeModal={() => setOpenModal(!openModal)} />
+      </ModalCustom>
       <NavbarComponent />
       {isLoading ? (
         <SpinnerComponent />
       ) : (
         <div className="shadow-xl w-[80%] mx-auto p-4 my-8">
           <p className="text-center text-xl font-bold">Loader Detail</p>
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-2">
             {user?._id !== postedBy._id && (
-              <Button className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white " onClick={handleChat}>
+              <Button
+                className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white "
+                onClick={handleChat}
+              >
                 Chat
               </Button>
             )}
@@ -78,9 +92,14 @@ function LoaderDetail() {
                 {loading ? "Deleting..." : "Delete"}
               </Button>
             )}
-            {/* <Button className='bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white '>
-              Hire
-            </Button> */}
+            {user && (
+              <Button
+                className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white"
+                onClick={handleBookLoader}
+              >
+                Book
+              </Button>
+            )}
           </div>
           <div className="flex justify-between flex-wrap p-4 gap-4">
             <p>
@@ -122,7 +141,7 @@ function LoaderDetail() {
           <ImageCarousel data={vehiclePicture} />
         </div>
       )}
-      <FooterComponent/>
+      <FooterComponent />
     </>
   );
 }
