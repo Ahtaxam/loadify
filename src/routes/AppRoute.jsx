@@ -1,21 +1,22 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { PATH } from '../utils/path';
-import Home from '../screens//landing';
-import Login from '../screens/auth/Login';
-import Signup from '../screens/auth/signup';
-import HomeMain from '../screens/home';
-import ProtectedRoute from './ProtectedRoute';
-import TruckLoader from '../screens/loader';
-import InventoryDetail from '../components/inventoryDetail';
-import RoleRoute from './RoleRoute';
-import InventoryHolder from '../screens/inventory';
-import LoaderDetail from '../components/loaderDetail';
-import UnAuthorized from '../screens/unAuthorized';
-import LoaderPersonalAdds from '../screens/myAdds/loader';
-import InventoryHolderPersonalAdds from '../screens/myAdds/inventory';
-import MyAdds from '../screens/myAdds';
-import Chat from '../screens/chat/index';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { PATH } from "../utils/path";
+import Home from "../screens//landing";
+import Login from "../screens/auth/Login";
+import Signup from "../screens/auth/signup";
+import HomeMain from "../screens/home";
+import ProtectedRoute from "./ProtectedRoute";
+import TruckLoader from "../screens/loader";
+import InventoryDetail from "../components/inventoryDetail";
+import RoleRoute from "./RoleRoute";
+import InventoryHolder from "../screens/inventory";
+import LoaderDetail from "../components/loaderDetail";
+import UnAuthorized from "../screens/unAuthorized";
+import LoaderPersonalAdds from "../screens/myAdds/loader";
+import InventoryHolderPersonalAdds from "../screens/myAdds/inventory";
+import MyAdds from "../screens/myAdds";
+import Chat from "../screens/chat/index";
+import ActiveAdds from "../screens/activeadds/inventory";
 
 function AppRoute() {
   return (
@@ -39,13 +40,25 @@ function AppRoute() {
         <Route path={PATH.INVENTORYADD} element={<InventoryHolder />} />
 
         <Route path={PATH.LOADERDETAIL} element={<LoaderDetail />} />
-        <Route path={PATH.MYADDS} element={<MyAdds/>} />
+        <Route path={PATH.MYADDS} element={<MyAdds />} />
 
-        <Route path={PATH.CHAT} element={
-          <ProtectedRoute>
-            <Chat/>
-          </ProtectedRoute>
-        } />
+        <Route
+          path={PATH.CHAT}
+          element={
+            <ProtectedRoute>
+              <Chat />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path={PATH.ACTIVEADDS}
+          element={
+            <ProtectedRoute>
+              <ActiveAdds />
+            </ProtectedRoute>
+          }
+        ></Route>
 
         {/* <Route
           path={PATH.LOADERPERSONALADDS}
