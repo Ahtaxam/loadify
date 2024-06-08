@@ -10,6 +10,7 @@ export const chatApi = createApi({
       return authorizationHeader(headers, getState);
     },
   }),
+  tagTypes: ["chat", "UserChats"], 
   endpoints: (builder) => ({
     sendMessage: builder.mutation({
       query: ({ id, data }) => ({
@@ -17,13 +18,15 @@ export const chatApi = createApi({
         method: "POST",
         body: { message: data },
       }),
+      invalidatesTags: ["UserChats"], 
     }),
     getMessages: builder.query({
       query: (id) => `/message/${id}`,
+      providesTags: (result, error, id) => [{ type: 'chat', id }],
     }),
-
     getUserChats: builder.query({
       query: () => "/message/user",
+      providesTags: ["UserChats"], 
     }),
   }),
 });
