@@ -8,10 +8,15 @@ import { PATH } from "../../../utils/path";
 import { useLoginUserMutation } from '../../../redux/api/user';
 import { storeCurrentUser } from '../../../utils/currentUser';
 import { toast } from 'react-toastify';
+import { useDispatch } from "react-redux";
+import { storeUser } from "../../../redux/slice/currentUser";
+import { connectToSocket } from "../../../context/socketEvent";
+// import { connectToSocket } from "../../../context/socket";
 
 function Login() {
   const [loginUser, {isLoading} ] = useLoginUserMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const initialValues = {
     email: "",
     password: "",
@@ -27,6 +32,8 @@ function Login() {
       const { message, data, token } = await loginUser(values).unwrap();
       toast.success(message);
       storeCurrentUser({ ...data, token });
+      dispatch(storeUser(data))
+      connectToSocket(data?._id)
       navigate(PATH.HOME)
     } catch (error) {
       toast.error(error?.data?.message);

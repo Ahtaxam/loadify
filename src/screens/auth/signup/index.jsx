@@ -8,11 +8,10 @@ import { PATH } from "../../../utils/path";
 import { useCreateUserMutation } from "../../../redux/api/user";
 import { toast } from "react-toastify";
 import { storeCurrentUser } from "../../../utils/currentUser";
+import { connectToSocket } from "../../../context/socketEvent";
 
-// const ROLE = ["Truck Loader", "Inventory"];
 function Signup() {
   const [createUser, { isLoading }] = useCreateUserMutation();
-  // const [selectedRole, setSelectedRole] = useState(ROLE[0]);
   const navigate = useNavigate();
   const initialValues = {
     firstName: "",
@@ -21,7 +20,6 @@ function Signup() {
     password: "",
     phoneNumber: "",
     address: "",
-    // role: ROLE[0],
   };
 
   const validationSchema = Yup.object({
@@ -33,15 +31,13 @@ function Signup() {
     password: Yup.string().required("Password is required").min(8),
   });
 
-  // const handleSelectedRole = (name, setFieldValue) => {
-  //   setSelectedRole(name);
-  //   setFieldValue("role", name);
-  // };
+
   const handleSubmit = async (values) => {
     try {
       const { message, data, token } = await createUser(values).unwrap();
       toast.success(message);
       storeCurrentUser({ ...data, token });
+      connectToSocket(data?._id)
       if (data?.role === "Truck Loader") {
         navigate(PATH.LOADERADDS);
         return;
