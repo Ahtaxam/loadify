@@ -4,11 +4,12 @@ import { toast } from "react-toastify";
 import { getToken } from "../utils/currentUser";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-const token = getToken();
 
 const useGetMesseges = () => {
   const { messages, setMessages, selectedConversation } = useConversation();
   const [loading, setLoading] = useState(false);
+  const token = getToken();
+
 
   useEffect(() => {
     const getMessages = async () => {
