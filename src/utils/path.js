@@ -19,5 +19,7 @@ export const PATH = {
 
   MYADDS:"/myadds",
 
-  CHAT:"/chat"
+  CHAT:"/chat",
+
+  ACTIVEADDS:"/active"
 };
