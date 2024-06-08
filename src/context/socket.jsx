@@ -14,11 +14,9 @@ export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const user = getCurrentUser();
-
   URL = URL.slice(0, -7);
 
   useEffect(() => {
-    // Check if user is available before creating socket connection
     if (user) {
       const socket = io(URL, {
         query: {
@@ -31,16 +29,16 @@ export const SocketContextProvider = ({ children }) => {
         setOnlineUsers(users);
       });
 
-      // Close socket connection when component unmounts or user becomes unavailable
-      return () => socket.close();
+      return () => {
+        socket.disconnect();
+      };
     } else {
-      // Close socket connection if user becomes unavailable
       if (socket) {
-        socket.close();
+        socket.disconnect();
         setSocket(null);
       }
     }
-  }, []); // Only run useEffect when user changes
+  }, []);
 
   return (
     <SocketContext.Provider value={{ socket, onlineUsers }}>
