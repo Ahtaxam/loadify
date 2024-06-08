@@ -13,7 +13,8 @@ import NavbarComponent from "./navbar";
 import { toast } from "react-toastify";
 import { PATH } from "../utils/path";
 import { useDispatch } from "react-redux";
-import FooterComponent from './footer';
+import FooterComponent from "./footer";
+import useConversation from "../zustand/userConversation";
 
 function InventoryDetail() {
   const { id } = useParams();
@@ -24,8 +25,10 @@ function InventoryDetail() {
     useDeleteInventoryMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { setSelectedConversation } = useConversation();
+
   const {
-    postedBy = "",
+    postedBy = {},
     _id = "",
     inventoryType = "",
     inventorySize = "",
@@ -51,6 +54,11 @@ function InventoryDetail() {
     }
   };
 
+  const handleChat = () => {
+    setSelectedConversation(postedBy);
+    navigate(PATH.CHAT);
+  };
+
   return (
     <>
       <NavbarComponent />
@@ -60,15 +68,22 @@ function InventoryDetail() {
         <div className="shadow-xl w-[80%] mx-auto p-4 my-8">
           <p className="text-center text-xl font-bold">Inventory Detail</p>
           <div className="flex justify-end">
-              {user?._id !== postedBy && <Button className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white ">
+            {user?._id !== postedBy?._id && (
+              <Button
+                className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white "
+                onClick={handleChat}
+              >
                 Chat
-              </Button>}
-             {user && user?._id === postedBy && <Button
+              </Button>
+            )}
+            {user && user?._id === postedBy?._id && (
+              <Button
                 className="bg-red-500 w-[100px] "
                 onClick={handleDeleteInventory}
               >
                 {loading ? "Deleting..." : "Delete"}
-              </Button>}
+              </Button>
+            )}
           </div>
           <div className="flex justify-between flex-wrap p-4">
             <p>
@@ -110,7 +125,7 @@ function InventoryDetail() {
           <ImageCarousel data={inventoryPicture} />
         </div>
       )}
-      <FooterComponent/>
+      <FooterComponent />
     </>
   );
 }

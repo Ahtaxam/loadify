@@ -119,7 +119,7 @@ function NavbarComponent() {
               <Link as={Link} href='#' className='underline-link'>
                 Active Order
               </Link>
-              <Link to='#' className='underline-link'>
+              <Link to={PATH.CHAT} className='underline-link'>
                 Messages
               </Link>
             </>

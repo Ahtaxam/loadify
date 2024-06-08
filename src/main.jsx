@@ -6,15 +6,19 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.jsx";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { SocketContextProvider } from "./context/socket.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <BrowserRouter>
+      <SocketContextProvider>
         <App />
-        <ToastContainer />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+      </SocketContextProvider>
+
+      <ToastContainer />
+    </BrowserRouter>
+  </Provider>
+  // </React.StrictMode>
 );
