@@ -20,14 +20,28 @@ export const bookingApi = createApi({
       }),
       invalidatesTags: ["Booking"],
     }),
+
+
     getAllActiveAdds: builder.query({
       query: () => ({
         url: "/booking/active",
       }),
       providesTags: ["Booking"],
     }),
+
+    completeOrder: builder.mutation({
+      query: (data) => ({
+        url: "/booking/complete",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Booking"],
+    }),
   }),
 });
 
-export const { useShippInventoryMutation, useGetAllActiveAddsQuery } =
-  bookingApi;
+export const {
+  useShippInventoryMutation,
+  useGetAllActiveAddsQuery,
+  useCompleteOrderMutation,
+} = bookingApi;
