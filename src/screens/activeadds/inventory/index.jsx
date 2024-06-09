@@ -12,7 +12,6 @@ import { PATH } from "../../../utils/path";
 function ActiveAdds() {
   const token = getToken();
   const { data, isLoading, refetch } = useGetAllActiveAddsQuery();
-  console.log(data);
   const navigate = useNavigate();
   useEffect(() => {
     refetch();
@@ -20,7 +19,8 @@ function ActiveAdds() {
 
   const handleLoaderOrder = () => {
     navigate(
-      `${PATH.SHOWINVENTORYDETAIL}/${data?.data?.loader?.orderId?.inventoryId?._id}`
+      `${PATH.SHOWINVENTORYDETAIL}/${data?.data?.loader?.orderId?.inventoryId?._id}`,
+      { state: { loaderId: data?.data?.loader?._id } }
     );
   };
   return (
@@ -52,7 +52,7 @@ function ActiveAdds() {
           Array.from({ length: 3 }).map((_, i) => (
             <LoaderCardSkeleton key={i} />
           ))
-        ) : data?.data?.loader ? (
+        ) : data?.data?.loader?.orderId ? (
           <LoaderOrderCard
             data={data?.data?.loader}
             onClick={handleLoaderOrder}

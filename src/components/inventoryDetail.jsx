@@ -1,7 +1,7 @@
 import React from "react";
 import ImageCarousel from "./imageCarousel";
 import Button from "./button";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   inventoryAddApi,
   useDeleteInventoryMutation,
@@ -15,17 +15,20 @@ import { PATH } from "../utils/path";
 import { useDispatch } from "react-redux";
 import FooterComponent from "./footer";
 import useConversation from "../zustand/userConversation";
+import { useCompleteOrderMutation } from "../redux/api/booking";
 
 function InventoryDetail() {
   const { id } = useParams();
   const user = getCurrentUser();
   const role = getUserRole();
   const { data, isLoading } = useGetSingleInventoryQuery(id);
+  const [completeOrder, { isLoading: Loading }] = useCompleteOrderMutation();
   const [deleteInventory, { isLoading: loading }] =
     useDeleteInventoryMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { setSelectedConversation } = useConversation();
+  const { state } = useLocation();
 
   const {
     postedBy = {},
@@ -42,7 +45,6 @@ function InventoryDetail() {
     inventoryPicture = [],
     status = "",
   } = data?.data || {};
-  console.log(data?.data);
 
   const handleDeleteInventory = async () => {
     try {
@@ -61,9 +63,19 @@ function InventoryDetail() {
     navigate(PATH.CHAT);
   };
 
-  const handleCompleteOrder = () => {
-    console.log("Order Completed");
-  }
+  const handleCompleteOrder = async () => {
+    try {
+      const { message } = await completeOrder({
+        inventoryId: _id,
+        loaderId: state?.loaderId,
+      }).unwrap();
+      toast.success(message);
+      navigate(PATH.HOME);
+    } catch (error) {
+      console.log(error);
+      toast.error("Server error")
+    }
+  };
 
   return (
     <>
@@ -74,7 +86,7 @@ function InventoryDetail() {
         <div className="shadow-xl w-[80%] mx-auto p-4 my-8">
           <p className="text-center text-xl font-bold">Inventory Detail</p>
           <div className="flex justify-end">
-            {user?._id !== postedBy?._id && status=== "posted" && (
+            {user?._id !== postedBy?._id && status === "posted" && (
               <Button
                 className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white "
                 onClick={handleChat}
@@ -87,7 +99,7 @@ function InventoryDetail() {
                 className="bg-navy  hover:bg-[hsl(0,100%,4%)] hover:text-white "
                 onClick={handleCompleteOrder}
               >
-               Complete Order
+                {Loading ? "Completing..." : "Complete Order"}
               </Button>
             )}
             {user && user?._id === postedBy?._id && status === "posted" ? (
