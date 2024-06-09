@@ -1,14 +1,20 @@
 import React from "react";
 import { getToken } from "../../utils/currentUser";
 import {
+  inventoryAddApi,
   useGetPersonalAddsQuery,
-  useShippInventoryMutation,
 } from "../../redux/api/inventoryAdd";
 import Inventory from "./inventory";
 import SpinnerComponent from "../../components/spinner";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "../../utils/path";
+import { useDispatch } from "react-redux";
+import { bookingApi, useShippInventoryMutation } from "../../redux/api/booking";
 
-function Inventories({ closeModal }) {
+function Inventories({ closeModal, loaderId }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const token = getToken();
   const { data, isLoading } = useGetPersonalAddsQuery(token);
   const [shipInventory, { isLoading: loading }] = useShippInventoryMutation();
@@ -17,10 +23,14 @@ function Inventories({ closeModal }) {
     try {
       const { message } = await shipInventory({
         inventoryId: id,
+        loaderId,
       }).unwrap();
 
       toast.success(message);
       closeModal();
+      navigate(PATH.HOME);
+
+      dispatch(bookingApi.util.invalidateTags(["Booking"]));
     } catch (error) {
       toast.error("Server ERROR");
     }
