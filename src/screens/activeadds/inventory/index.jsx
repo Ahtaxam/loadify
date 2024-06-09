@@ -1,13 +1,28 @@
-import React from "react";
-import { useGetAllActiveAddsQuery } from "../../../redux/api/inventoryAdd";
+import React, { useEffect } from "react";
 import NavbarComponent from "../../../components/navbar";
 import LoaderCardSkeleton from "../../../shimmer/loaders";
 import InventoryCard from "../../../components/inventoryCard";
 import ActiveOrderCard from "../../../components/activeOrderCard";
+import { getToken } from "../../../utils/currentUser";
+import { useGetAllActiveAddsQuery } from "../../../redux/api/booking";
+import LoaderOrderCard from "../../../components/LoaderOrderCard";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "../../../utils/path";
 
 function ActiveAdds() {
-  const { data, isLoading } = useGetAllActiveAddsQuery();
+  const token = getToken();
+  const { data, isLoading, refetch } = useGetAllActiveAddsQuery();
   console.log(data);
+  const navigate = useNavigate();
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  const handleLoaderOrder = () => {
+    navigate(
+      `${PATH.SHOWINVENTORYDETAIL}/${data?.data?.loader?.orderId?.inventoryId?._id}`
+    );
+  };
   return (
     <>
       <NavbarComponent />
@@ -17,18 +32,33 @@ function ActiveAdds() {
           Array.from({ length: 3 }).map((_, i) => (
             <LoaderCardSkeleton key={i} />
           ))
-        ) : data?.data.length === 0 ? (
-          <p className="font-inter text-xl ">
-            you have't post any Inventory Add
-          </p>
+        ) : data?.data?.inventories?.length === 0 ? (
+          <p className="font-inter text-xl ">No Active Inventory</p>
         ) : (
-          data?.data?.map((obj, i) => (
+          data?.data?.inventories?.map((obj, i) => (
             <ActiveOrderCard
               data={obj}
               key={i}
-            //   onClick={() => handleInventoryDetail(obj?._id)}
+              //   onClick={() => handleInventoryDetail(obj?._id)}
             />
           ))
+        )}
+      </div>
+
+      <hr className="w-[80%] mx-aut p-4" />
+
+      <div className="grid 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 justify-items-center py-4 px-2 flex-wrap">
+        {isLoading ? (
+          Array.from({ length: 3 }).map((_, i) => (
+            <LoaderCardSkeleton key={i} />
+          ))
+        ) : data?.data?.loader ? (
+          <LoaderOrderCard
+            data={data?.data?.loader}
+            onClick={handleLoaderOrder}
+          />
+        ) : (
+          <p className="font-inter text-xl ">No Active Loader Order</p>
         )}
       </div>
     </>
