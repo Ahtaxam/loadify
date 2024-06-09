@@ -62,12 +62,11 @@ function LoaderDetail() {
 
   const handleBookLoader = () => {
     setOpenModal(true);
-    console.log("booked");
   };
   return (
     <>
       <ModalCustom open={openModal} setOpen={() => setOpenModal(!openModal)}>
-        <Inventories closeModal={() => setOpenModal(!openModal)} />
+        <Inventories closeModal={() => setOpenModal(!openModal)} loaderId={_id}/>
       </ModalCustom>
       <NavbarComponent />
       {isLoading ? (
@@ -92,7 +91,7 @@ function LoaderDetail() {
                 {loading ? "Deleting..." : "Delete"}
               </Button>
             )}
-            {user && (
+            {user && user?._id !== postedBy._id&& (
               <Button
                 className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white"
                 onClick={handleBookLoader}

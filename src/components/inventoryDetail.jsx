@@ -42,6 +42,7 @@ function InventoryDetail() {
     inventoryPicture = [],
     status = "",
   } = data?.data || {};
+  console.log(data?.data);
 
   const handleDeleteInventory = async () => {
     try {
@@ -60,6 +61,10 @@ function InventoryDetail() {
     navigate(PATH.CHAT);
   };
 
+  const handleCompleteOrder = () => {
+    console.log("Order Completed");
+  }
+
   return (
     <>
       <NavbarComponent />
@@ -69,12 +74,20 @@ function InventoryDetail() {
         <div className="shadow-xl w-[80%] mx-auto p-4 my-8">
           <p className="text-center text-xl font-bold">Inventory Detail</p>
           <div className="flex justify-end">
-            {user?._id !== postedBy?._id && (
+            {user?._id !== postedBy?._id && status=== "posted" && (
               <Button
                 className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white "
                 onClick={handleChat}
               >
                 Chat
+              </Button>
+            )}
+            {user?._id !== postedBy?._id && status !== "posted" && (
+              <Button
+                className="bg-navy  hover:bg-[hsl(0,100%,4%)] hover:text-white "
+                onClick={handleCompleteOrder}
+              >
+               Complete Order
               </Button>
             )}
             {user && user?._id === postedBy?._id && status === "posted" ? (
