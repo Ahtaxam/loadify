@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { PATH } from "../../utils/path";
 import { useDispatch } from "react-redux";
 import { bookingApi, useShippInventoryMutation } from "../../redux/api/booking";
+import { truckAddApi } from "../../redux/api/truckadd";
 
 function Inventories({ closeModal, loaderId }) {
   const navigate = useNavigate();
@@ -31,6 +32,8 @@ function Inventories({ closeModal, loaderId }) {
       navigate(PATH.HOME);
 
       dispatch(bookingApi.util.invalidateTags(["Booking"]));
+      dispatch(inventoryAddApi.util.invalidateTags(["Inventory"]));
+      dispatch(truckAddApi.util.invalidateTags(["Truck"]));
     } catch (error) {
       toast.error("Server ERROR");
     }
