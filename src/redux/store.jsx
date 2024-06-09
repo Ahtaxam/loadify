@@ -5,6 +5,7 @@ import { truckAddApi } from "./api/truckadd";
 import { inventoryAddApi } from "./api/inventoryAdd";
 import { chatApi } from "./api/chatApi";
 import currentUserReducer from "./slice/currentUser";
+import { bookingApi } from "./api/booking";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     [truckAddApi.reducerPath]: truckAddApi.reducer,
     [inventoryAddApi.reducerPath]: inventoryAddApi.reducer,
     [chatApi.reducerPath]: chatApi.reducer,
+    [bookingApi.reducerPath]: bookingApi.reducer,
     currentUser: currentUserReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -19,6 +21,7 @@ export const store = configureStore({
       userApi.middleware,
       truckAddApi.middleware,
       inventoryAddApi.middleware,
+      bookingApi.middleware,
       chatApi.middleware
     ),
 });
