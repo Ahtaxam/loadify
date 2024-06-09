@@ -40,26 +40,26 @@ export const inventoryAddApi = createApi({
       invalidatesTags: ["Inventory"],
     }),
 
-    shippInventory: builder.mutation({
-      query: (data) => ({
-        url: "/inventory/shipped",
-        method: "PUT",
-        body: data,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }),
-      invalidatesTags: ["Inventory"],
-    }),
-    getAllActiveAdds: builder.query({
-      query: () => ({
-        url: "/inventory/active",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }),
-      invalidatesTags: ["Inventory"],
-    }),
+    // shippInventory: builder.mutation({
+    //   query: (data) => ({
+    //     url: "/inventory/shipped",
+    //     method: "PUT",
+    //     body: data,
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   }),
+    //   invalidatesTags: ["Inventory"],
+    // }),
+    // getAllActiveAdds: builder.query({
+    //   query: (authToken) => ({
+    //     url: "/inventory/active",
+    //     headers: {
+    //       Authorization: `Bearer ${authToken}`,
+    //     },
+    //   }),
+    //   invalidatesTags: ["Inventory"],
+    // }),
   }),
 });
 
@@ -68,6 +68,6 @@ export const {
   useGetSingleInventoryQuery,
   useGetPersonalAddsQuery,
   useDeleteInventoryMutation,
-  useShippInventoryMutation,
-  useGetAllActiveAddsQuery
+  // useShippInventoryMutation,
+  // useGetAllActiveAddsQuery
 } = inventoryAddApi;
