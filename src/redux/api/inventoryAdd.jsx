@@ -30,11 +30,11 @@ export const inventoryAddApi = createApi({
       providesTags: ["Inventory"],
     }),
     deleteInventory: builder.mutation({
-      query: (id) => ({
+      query: ({id,authToken}) => ({
         url: `/inventory/${id}`,
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${authToken}`,
         },
       }),
       invalidatesTags: ["Inventory"],
