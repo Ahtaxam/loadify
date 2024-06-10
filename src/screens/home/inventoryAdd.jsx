@@ -97,6 +97,7 @@ function InventoryAdd({ closeModel }) {
         dispatch(inventoryAddApi.util.invalidateTags(["Inventory"]))
       }
     } catch (error) {
+      console.log(error);
       setLoading(false);
       toast.error(error?.response?.data?.message || 'SERVER ERROR: ');
       console.log(error.response.data.message);
