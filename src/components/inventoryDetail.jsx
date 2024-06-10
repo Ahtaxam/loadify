@@ -8,7 +8,7 @@ import {
   useGetSingleInventoryQuery,
 } from "../redux/api/inventoryAdd";
 import SpinnerComponent from "./spinner";
-import { getCurrentUser, getUserRole } from "../utils/currentUser";
+import { getCurrentUser, getToken, getUserRole } from "../utils/currentUser";
 import NavbarComponent from "./navbar";
 import { toast } from "react-toastify";
 import { PATH } from "../utils/path";
@@ -20,6 +20,7 @@ import { useCompleteOrderMutation } from "../redux/api/booking";
 function InventoryDetail() {
   const { id } = useParams();
   const user = getCurrentUser();
+  const token = getToken();
   const role = getUserRole();
   const { data, isLoading } = useGetSingleInventoryQuery(id);
   const [completeOrder, { isLoading: Loading }] = useCompleteOrderMutation();
@@ -48,7 +49,10 @@ function InventoryDetail() {
 
   const handleDeleteInventory = async () => {
     try {
-      const { message } = await deleteInventory(id).unwrap();
+      const { message } = await deleteInventory({
+        id:id,
+        authToken:token
+      }).unwrap();
       toast.success(message);
       navigate(PATH.MYADDS);
       dispatch(inventoryAddApi.util.invalidateTags(["Inventory"]));
