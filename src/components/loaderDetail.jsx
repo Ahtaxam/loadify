@@ -17,9 +17,11 @@ import { useDispatch } from "react-redux";
 import useConversation from "../zustand/userConversation";
 import ModalCustom from "./modal";
 import Inventories from "../screens/bookLoader";
+import Login from '../screens/auth/Login';
 
 function LoaderDetail() {
   const [openModal, setOpenModal] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
   const { id } = useParams();
   const user = getCurrentUser();
   const navigate = useNavigate();
@@ -57,7 +59,8 @@ function LoaderDetail() {
 
   const handleChat = () => {
     setSelectedConversation(postedBy);
-    navigate(PATH.CHAT);
+    setLoginOpen(true)
+    // navigate(PATH.CHAT);
   };
 
   const handleBookLoader = () => {
@@ -67,6 +70,9 @@ function LoaderDetail() {
     <>
       <ModalCustom open={openModal} setOpen={() => setOpenModal(!openModal)}>
         <Inventories closeModal={() => setOpenModal(!openModal)} loaderId={_id}/>
+      </ModalCustom>
+      <ModalCustom open={loginOpen} setOpen={() => setLoginOpen(!loginOpen)}>
+        <Login className="p-4" closeModal = {() => setLoginOpen(!loginOpen)} notNavigation={true}/>
       </ModalCustom>
       <NavbarComponent />
       {isLoading ? (
