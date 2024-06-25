@@ -37,7 +37,7 @@ function InventoryHolder() {
       <NavbarComponent />
       <Typography className='m-4'>All Loaders</Typography>
 
-      <div className='flex space-x-4 m-4 p-4'>
+      <div className='flex gap-2 justify-center md:justify-start p-4 flex-wrap'>
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
