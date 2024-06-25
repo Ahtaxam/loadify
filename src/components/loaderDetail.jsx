@@ -59,8 +59,11 @@ function LoaderDetail() {
 
   const handleChat = () => {
     setSelectedConversation(postedBy);
-    setLoginOpen(true)
-    // navigate(PATH.CHAT);
+    if (!user) {
+      setLoginOpen(true);
+    } else {
+      navigate(PATH.CHAT);
+    }
   };
 
   const handleBookLoader = () => {
