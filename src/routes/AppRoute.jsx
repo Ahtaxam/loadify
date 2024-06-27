@@ -17,6 +17,8 @@ import InventoryHolderPersonalAdds from "../screens/myAdds/inventory";
 import MyAdds from "../screens/myAdds";
 import Chat from "../screens/chat/index";
 import ActiveAdds from "../screens/activeadds/inventory";
+import About from "../screens/aboutUs";
+import ContactUs from "../screens/contactUs";
 
 function AppRoute() {
   return (
@@ -81,7 +83,8 @@ function AppRoute() {
             </ProtectedRoute>
           }
         /> */}
-
+        <Route path={PATH.CONTACTUS} element={<ContactUs />} />
+        <Route path={PATH.ABOUTUS} element={<About />} />
         <Route path={PATH.UNAUTHORIZED} element={<UnAuthorized />} />
       </Routes>
     </div>
