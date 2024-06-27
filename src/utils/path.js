@@ -21,5 +21,8 @@ export const PATH = {
 
   CHAT:"/chat",
 
-  ACTIVEADDS:"/active"
+  ACTIVEADDS:"/active",
+
+  ABOUTUS:"/aboutus",
+  CONTACTUS:"/contactus"
 };
