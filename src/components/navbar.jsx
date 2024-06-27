@@ -85,26 +85,35 @@ function NavbarComponent() {
         </>
       )}
       <Navbar.Collapse>
-        <div className="flex items-center space-x-6 ">
-          <Link to={PATH.HOME} className="underline-link">
+        <div className="flex flex-col  items-center md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6">
+          <Link
+            to={PATH.HOME}
+            className="underline-link md:border-0 md:w-fit md:p-0  border-2  w-full p-2 rounded text-white "
+          >
             Home
           </Link>
-          <Link to={PATH.ABOUTUS} className="underline-link">
+          <Link
+            to={PATH.ABOUTUS}
+            className="underline-link md:border-0 md:w-fit md:p-0 border-2  w-full p-2 rounded text-white "
+          >
             About
           </Link>
-          <Link to={PATH.CONTACTUS} className="underline-link">
+          <Link
+            to={PATH.CONTACTUS}
+            className="underline-link md:border-0 md:w-fit md:p-0  border-2  w-full p-2 rounded text-white "
+          >
             Contact us
           </Link>
           {!user && (
             <>
               {" "}
-              <Link to={PATH.LOGIN}>
-                <button className="bg-[#00215E] text-white p-2 rounded">
+              <Link to={PATH.LOGIN} className="md:w-fit w-full">
+                <button className="bg-[#00215E] text-white p-2 rounded w-full">
                   Login
                 </button>
               </Link>
-              <Link to={PATH.SIGNUP}>
-                <button className="bg-[#00215E] text-white p-2 rounded">
+              <Link to={PATH.SIGNUP} className="md:w-fit w-full">
+                <button className="bg-[#00215E] text-white p-2 rounded w-full">
                   Signup
                 </button>
               </Link>
@@ -113,13 +122,22 @@ function NavbarComponent() {
 
           {user && (
             <>
-              <Link to={PATH.MYADDS} className="underline-link">
+              <Link
+                to={PATH.MYADDS}
+                className="underline-link md:border-0 md:w-fit md:p-0  border-2  w-full p-2 rounded text-white "
+              >
                 My Adds
               </Link>
-              <Link to={PATH.ACTIVEADDS} className="underline-link">
+              <Link
+                to={PATH.ACTIVEADDS}
+                className="underline-link md:border-0 md:w-fit md:p-0  border-2  w-full p-2 rounded text-white "
+              >
                 Active Order
               </Link>
-              <Link to={PATH.CHAT} className="underline-link">
+              <Link
+                to={PATH.CHAT}
+                className="underline-link md:border-0 md:w-fit md:p-0  border-2  w-full p-2 rounded text-white "
+              >
                 Messages
               </Link>
             </>
