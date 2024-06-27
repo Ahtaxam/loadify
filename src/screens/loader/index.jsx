@@ -35,7 +35,7 @@ function TruckLoader() {
       <NavbarComponent />
       <Typography className='m-4'>All Inventories</Typography>
 
-      <div className='flex space-x-4 m-4 p-4'>
+      <div className='flex gap-2 justify-center  p-4 flex-wrap'>
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
@@ -70,7 +70,7 @@ function TruckLoader() {
         </select>
       </div>
 
-      <div className='grid 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 justify-items-center py-4 px-2 flex-wrap'>
+      <div className='grid 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4  p-4 flex-wrap '>
         {isLoading
           ? Array.from({ length: 3 }).map((_, i) => (
               <LoaderCardSkeleton key={i} />
