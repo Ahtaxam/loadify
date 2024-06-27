@@ -1,25 +1,25 @@
-import { Dropdown } from 'flowbite-react';
-import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Header from '../../components/header';
-import InventoryCard from '../../components/inventoryCard';
-import LoaderCard from '../../components/loaderCard';
-import ModalCustom from '../../components/modal';
-import NavbarComponent from '../../components/navbar';
-import { useGetPersonalAddsQuery } from '../../redux/api/inventoryAdd';
-import { useMyPersonalAddsQuery } from '../../redux/api/truckadd';
-import LoaderCardSkeleton from '../../shimmer/loaders';
-import { getToken } from '../../utils/currentUser';
-import { PATH } from '../../utils/path';
-import InventoryAdd from '../home/inventoryAdd';
-import PostAdd from '../home/postAdd';
+import { Dropdown } from "flowbite-react";
+import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../../components/header";
+import InventoryCard from "../../components/inventoryCard";
+import LoaderCard from "../../components/loaderCard";
+import ModalCustom from "../../components/modal";
+import NavbarComponent from "../../components/navbar";
+import { useGetPersonalAddsQuery } from "../../redux/api/inventoryAdd";
+import { useMyPersonalAddsQuery } from "../../redux/api/truckadd";
+import LoaderCardSkeleton from "../../shimmer/loaders";
+import { getToken } from "../../utils/currentUser";
+import { PATH } from "../../utils/path";
+import InventoryAdd from "../home/inventoryAdd";
+import PostAdd from "../home/postAdd";
 
-const ADDPOSTLABEL = ['Loader', 'Inventory'];
+const ADDPOSTLABEL = ["Loader", "Inventory"];
 
 function MyAdds() {
   const token = getToken();
-  const [addName, setAddName] = useState('');
+  const [addName, setAddName] = useState("");
   const [openModal, setOpenModal] = useState(false);
 
   const { data, isLoading } = useGetPersonalAddsQuery(token);
@@ -40,16 +40,16 @@ function MyAdds() {
   return (
     <div>
       <ModalCustom open={openModal} setOpen={setOpenModal}>
-        <p className='text-center text-2xl font-bold'>Post an Add</p>
-        {addName === 'Loader' ? (
+        <p className="text-center text-2xl font-bold">Post an Add</p>
+        {addName === "Loader" ? (
           <PostAdd closeModel={() => setOpenModal(false)} />
         ) : (
           <InventoryAdd closeModel={() => setOpenModal(false)} />
         )}
       </ModalCustom>
       <NavbarComponent />
-      <div className='m-4 float-end'>
-        <Dropdown label='Post An Add'>
+      <div className="m-4 float-end">
+        <Dropdown label="Post An Add">
           {ADDPOSTLABEL?.map((obj, i) => (
             <Dropdown.Item onClick={() => handlePostAdd(obj)} key={i}>
               {obj}
@@ -58,15 +58,15 @@ function MyAdds() {
         </Dropdown>
       </div>
 
-      <p className='m-4 text-2xl font-inter'>Inventory Adds</p>
+      <p className="m-4 text-2xl font-inter">Inventory Adds</p>
 
-      <div className='grid 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 justify-items-center py-4 px-2 flex-wrap'>
+      <div className="grid md:grid-cols-2  grid-cols-1 gap-4  py-4 px-2 flex-wrap w-full">
         {isLoading ? (
           Array.from({ length: 3 }).map((_, i) => (
             <LoaderCardSkeleton key={i} />
           ))
         ) : data?.data.length === 0 ? (
-          <p className='font-inter text-xl '>
+          <p className="font-inter text-xl ">
             you have't post any Inventory Add
           </p>
         ) : (
@@ -80,17 +80,15 @@ function MyAdds() {
         )}
       </div>
 
-      <p className='m-4 text-2xl font-inter'>Loader Adds</p>
+      <p className="m-4 text-2xl font-inter">Loader Adds</p>
 
-      <div className='grid 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 justify-items-center py-4 px-2 flex-wrap'>
+      <div className="grid md:grid-cols-2  grid-cols-1 gap-4 py-4 px-2 flex-wrap w-full">
         {isLoading ? (
           Array.from({ length: 3 }).map((_, i) => (
             <LoaderCardSkeleton key={i} />
           ))
         ) : LoaderAdds?.data.length === 0 ? (
-          <p className='font-inter text-xl '>
-            you have't post any Loader Add
-          </p>
+          <p className="font-inter text-xl ">you have't post any Loader Add</p>
         ) : (
           LoaderAdds?.data?.map((obj, i) => (
             <LoaderCard
