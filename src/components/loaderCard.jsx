@@ -13,7 +13,7 @@ function LoaderCard({ data, onClick }) {
 
   return (
     <div onClick={onClick} className="cursor-pointer">
-      <Card className="max-w-sm" imgSrc={vehiclePicture[0]} horizontal>
+      <Card  imgSrc={vehiclePicture[0]} horizontal>
         <h5 className="tracking-tight text-gray-900 dark:text-white flex flex-row justify-between  md:flex-col md:justify-start gap-4">
           <p>
             <span className="font-bold text-base">Name:</span> {vehicleName}

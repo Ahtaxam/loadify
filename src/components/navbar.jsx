@@ -89,10 +89,10 @@ function NavbarComponent() {
           <Link to={PATH.HOME} className="underline-link">
             Home
           </Link>
-          <Link to="#" className="underline-link">
+          <Link to={PATH.ABOUTUS} className="underline-link">
             About
           </Link>
-          <Link to="#" className="underline-link">
+          <Link to={PATH.CONTACTUS} className="underline-link">
             Contact us
           </Link>
           {!user && (
