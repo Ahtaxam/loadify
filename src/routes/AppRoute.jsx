@@ -19,6 +19,8 @@ import Chat from "../screens/chat/index";
 import ActiveAdds from "../screens/activeadds/inventory";
 import About from "../screens/aboutUs";
 import ContactUs from "../screens/contactUs";
+import ForgotPassword from "../screens/forgotPassword";
+import ResetPassword from "../screens/resetPassword";
 
 function AppRoute() {
   return (
@@ -86,6 +88,8 @@ function AppRoute() {
         <Route path={PATH.CONTACTUS} element={<ContactUs />} />
         <Route path={PATH.ABOUTUS} element={<About />} />
         <Route path={PATH.UNAUTHORIZED} element={<UnAuthorized />} />
+        <Route path={PATH.FORGOTPASSWORD} element={<ForgotPassword />} />
+        <Route path={PATH.RESETPASSWORD} element={<ResetPassword />} />
       </Routes>
     </div>
   );
