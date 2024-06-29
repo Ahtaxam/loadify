@@ -49,13 +49,12 @@ function Chat() {
     <>
       <NavbarComponent />
       <div className="flex p-4 justify-center bg-gray-100 h-screen ">
-        <div className="w-full bg-white rounded-lg shadow-lg overflow-hidden flex">
+        <div className="w-full bg-white rounded-lg shadow-lg overflow-hidden flex  h-[90%]">
           <div className="w-1/4 p-2 border-r border-gray-300">
             <h2 className="text-xl font-semibold mb-4 text-center">Users</h2>
             <ChatUsers />
           </div>
 
-          {/* Chat Box */}
           <div className="w-3/4 p-2 flex flex-col">
             {selectedConversation ? (
               <>
@@ -99,7 +98,10 @@ function Chat() {
           </div>
         </div>
       </div>
-      {/* <FooterComponent/> */}
+
+
+
+      <FooterComponent />
     </>
   );
 }
