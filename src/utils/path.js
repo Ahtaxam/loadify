@@ -1,28 +1,30 @@
 export const PATH = {
-  HOME: '/',
-  LOGIN: '/login',
-  SIGNUP: '/signup',
-  USERSHOME: '/postadds',
+  HOME: "/",
+  LOGIN: "/login",
+  SIGNUP: "/signup",
+  FORGOTPASSWORD: "/forgot-password",
+  RESETPASSWORD:"/reset-password/:id/:token",
+  USERSHOME: "/postadds",
 
-  LOADERADDS: '/inventories',
-  INVENTORYADD: '/loaders',
+  LOADERADDS: "/inventories",
+  INVENTORYADD: "/loaders",
 
-  INVENTORYDETAIL: '/inventory/detail/:id',
-  SHOWINVENTORYDETAIL: '/inventory/detail',
-  LOADERDETAIL: '/loader/detail/:id',
-  SHOWLOADERDETAIL: '/loader/detail',
+  INVENTORYDETAIL: "/inventory/detail/:id",
+  SHOWINVENTORYDETAIL: "/inventory/detail",
+  LOADERDETAIL: "/loader/detail/:id",
+  SHOWLOADERDETAIL: "/loader/detail",
 
-  LOADERPERSONALADDS: '/loader/personal/adds',
-  INVENTORYPERSONALADDS: '/inventory/personal/adds',
+  LOADERPERSONALADDS: "/loader/personal/adds",
+  INVENTORYPERSONALADDS: "/inventory/personal/adds",
 
-  UNAUTHORIZED: '/unauthorized',
+  UNAUTHORIZED: "/unauthorized",
 
-  MYADDS:"/myadds",
+  MYADDS: "/myadds",
 
-  CHAT:"/chat",
+  CHAT: "/chat",
 
-  ACTIVEADDS:"/active",
+  ACTIVEADDS: "/active",
 
-  ABOUTUS:"/aboutus",
-  CONTACTUS:"/contactus"
+  ABOUTUS: "/aboutus",
+  CONTACTUS: "/contactus",
 };
