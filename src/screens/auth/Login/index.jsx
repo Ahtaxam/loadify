@@ -24,7 +24,7 @@ function Login({ className, closeModal, notNavigation }) {
 
   const validationSchema = Yup.object({
     email: Yup.string().required("Email is required"),
-    password: Yup.string().required("Password is required").min(8),
+    password: Yup.string().required("Password is required"),
   });
 
   const handleSubmit = async (values) => {

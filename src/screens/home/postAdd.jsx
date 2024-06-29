@@ -58,8 +58,7 @@ function PostAdd({closeModel}) {
     ownerName: Yup.string().required('Owner name is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
     ownerCnic: Yup.string()
-      .required('Owner CNIC is required')
-      .matches(/^\d{13}$/, 'CNIC must be 13 digits'),
+      .required('Owner CNIC is required'),
     cnicPicture: Yup.array().min(1, 'CNIC picture is required').required(),
     licenceNumber: Yup.string().required('Licence number is required'),
     licencePicture: Yup.array()
