@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import FormikController from '../../../components/formik/formikController';
-import Button from '../../../components/button';
-import { Link, useNavigate } from 'react-router-dom';
-import { PATH } from '../../../utils/path';
-import { useLoginUserMutation } from '../../../redux/api/user';
-import { storeCurrentUser } from '../../../utils/currentUser';
-import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
-import { storeUser } from '../../../redux/slice/currentUser';
-import { connectToSocket } from '../../../context/socketEvent';
+import React, { useState } from "react";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import FormikController from "../../../components/formik/formikController";
+import Button from "../../../components/button";
+import { Link, useNavigate } from "react-router-dom";
+import { PATH } from "../../../utils/path";
+import { useLoginUserMutation } from "../../../redux/api/user";
+import { storeCurrentUser } from "../../../utils/currentUser";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { storeUser } from "../../../redux/slice/currentUser";
+import { connectToSocket } from "../../../context/socketEvent";
 // import { connectToSocket } from "../../../context/socket";
 
 function Login({ className, closeModal, notNavigation }) {
@@ -18,13 +18,13 @@ function Login({ className, closeModal, notNavigation }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const initialValues = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string().required('Email is required'),
-    password: Yup.string().required('Password is required').min(8),
+    email: Yup.string().required("Email is required"),
+    password: Yup.string().required("Password is required").min(8),
   });
 
   const handleSubmit = async (values) => {
@@ -51,11 +51,11 @@ function Login({ className, closeModal, notNavigation }) {
       className={`${
         className
           ? className
-          : 'flex justify-center items-center min-h-screen p-2'
+          : "flex justify-center items-center min-h-screen p-2"
       } `}
     >
-      <div className='bg-[#f5f5f5] w-full max-w-lg p-8 rounded-2xl'>
-        <p className='text-center font-extrabold text-xl'>Login</p>
+      <div className="bg-[#f5f5f5] w-full max-w-lg p-8 rounded-2xl">
+        <p className="text-center font-extrabold text-xl">Login</p>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -64,25 +64,27 @@ function Login({ className, closeModal, notNavigation }) {
           {(formik) => (
             <Form>
               <FormikController
-                control='input'
-                type='email'
-                label='Email'
-                name='email'
+                control="input"
+                type="email"
+                label="Email"
+                name="email"
               />
 
               <FormikController
-                control='input'
-                type='password'
-                label='Password'
-                name='password'
+                control="input"
+                type="password"
+                label="Password"
+                name="password"
               />
-
-              <Button type='submit' className='w-full'>
-                {isLoading ? 'Logging...' : 'Login'}
+              <div className="text-end underline">
+                <Link to={PATH.FORGOTPASSWORD}  >Forgot Password</Link>
+              </div>
+              <Button type="submit" className="w-full">
+                {isLoading ? "Logging..." : "Login"}
               </Button>
-              <p className='text-sm text-right'>
-                Don't have an account?{' '}
-                <Link to={PATH.SIGNUP} className='underline'>
+              <p className="text-sm text-right">
+                Don't have an account?{" "}
+                <Link to={PATH.SIGNUP} className="underline">
                   Create one
                 </Link>
               </p>
