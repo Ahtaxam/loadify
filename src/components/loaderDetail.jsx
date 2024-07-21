@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageCarousel from "./imageCarousel";
 import Button from "./button";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,15 +13,16 @@ import NavbarComponent from "./navbar";
 import { toast } from "react-toastify";
 import { PATH } from "../utils/path";
 import FooterComponent from "./footer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useConversation from "../zustand/userConversation";
 import ModalCustom from "./modal";
 import Inventories from "../screens/bookLoader";
-import Login from '../screens/auth/Login';
+import Login from "../screens/auth/Login";
 
 function LoaderDetail() {
   const [openModal, setOpenModal] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const current = useSelector((state) => state.currentUser);
   const { id } = useParams();
   const user = getCurrentUser();
   const navigate = useNavigate();
@@ -43,8 +44,8 @@ function LoaderDetail() {
     stateName = "",
     city = "",
     vehiclePicture = [],
+    status = "",
   } = data?.data || {};
-
   const handleDeleteLoader = async () => {
     try {
       const { message } = await deleteLoader(_id).unwrap();
@@ -69,13 +70,21 @@ function LoaderDetail() {
   const handleBookLoader = () => {
     setOpenModal(true);
   };
+
   return (
     <>
       <ModalCustom open={openModal} setOpen={() => setOpenModal(!openModal)}>
-        <Inventories closeModal={() => setOpenModal(!openModal)} loaderId={_id}/>
+        <Inventories
+          closeModal={() => setOpenModal(!openModal)}
+          loaderId={_id}
+        />
       </ModalCustom>
       <ModalCustom open={loginOpen} setOpen={() => setLoginOpen(!loginOpen)}>
-        <Login className="p-4" closeModal = {() => setLoginOpen(!loginOpen)} notNavigation={true}/>
+        <Login
+          className="p-4"
+          closeModal={() => setLoginOpen(!loginOpen)}
+          notNavigation={true}
+        />
       </ModalCustom>
       <NavbarComponent />
       {isLoading ? (
@@ -84,15 +93,16 @@ function LoaderDetail() {
         <div className="shadow-xl w-[80%] mx-auto p-4 my-8">
           <p className="text-center text-xl font-bold">Loader Detail</p>
           <div className="flex justify-end gap-2">
-            {user?._id !== postedBy._id && (
+            {(!user || (user && user?._id !== postedBy?._id)) && (
               <Button
-                className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white "
+                className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white"
                 onClick={handleChat}
               >
                 Chat
               </Button>
             )}
-            {user && user?._id === postedBy._id && (
+
+            {user && user?._id === postedBy?._id && (
               <Button
                 className="bg-red-500 w-[100px] "
                 onClick={handleDeleteLoader}
@@ -100,7 +110,7 @@ function LoaderDetail() {
                 {loading ? "Deleting..." : "Delete"}
               </Button>
             )}
-            {user && user?._id !== postedBy._id&& (
+            {user && user?._id !== postedBy?._id && (
               <Button
                 className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white"
                 onClick={handleBookLoader}

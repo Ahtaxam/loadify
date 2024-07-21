@@ -9,8 +9,11 @@ import { useCreateUserMutation } from "../../../redux/api/user";
 import { toast } from "react-toastify";
 import { storeCurrentUser } from "../../../utils/currentUser";
 import { connectToSocket } from "../../../context/socketEvent";
+import { storeUser } from "../../../redux/slice/currentUser";
+import { store } from "../../../redux/store";
+import { useDispatch } from "react-redux";
 
-function Signup() {
+function Signup({ className, closeModal }) {
   const [createUser, { isLoading }] = useCreateUserMutation();
   const navigate = useNavigate();
   const initialValues = {
@@ -22,6 +25,8 @@ function Signup() {
     address: "",
   };
 
+  const dispatch = useDispatch();
+
   const validationSchema = Yup.object({
     email: Yup.string().required("Email is required"),
     firstName: Yup.string().required("Firstname required"),
@@ -31,20 +36,19 @@ function Signup() {
     password: Yup.string().required("Password is required").min(8),
   });
 
-
   const handleSubmit = async (values) => {
     try {
       const { message, data, token } = await createUser(values).unwrap();
       toast.success(message);
       storeCurrentUser({ ...data, token });
-      connectToSocket(data?._id)
-      if (data?.role === "Truck Loader") {
-        navigate(PATH.LOADERADDS);
-        return;
-      } else {
-        navigate(PATH.INVENTORYADD);
+      connectToSocket(data?._id);
+      if (closeModal) {
+        closeModal();
+
+        dispatch(storeUser(data));
         return;
       }
+      navigate(PATH.HOME);
     } catch (error) {
       toast.error(error?.data?.message);
       console.log(error);
@@ -52,7 +56,11 @@ function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-2">
+    <div
+      className={`${
+        className ?? "flex justify-center items-center min-h-screen p-2"
+      }`}
+    >
       <div className="bg-[#f5f5f5] w-full max-w-lg p-8 rounded-2xl">
         <p className="text-center font-extrabold text-xl">Create Account</p>
         <Formik
