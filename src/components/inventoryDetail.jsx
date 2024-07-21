@@ -18,10 +18,11 @@ import useConversation from "../zustand/userConversation";
 import { useCompleteOrderMutation } from "../redux/api/booking";
 import Login from "../screens/auth/Login";
 import ModalCustom from "./modal";
+import UpdateInventoryAdd from "../screens/updateAdds/inventory";
 
 function InventoryDetail() {
   const [loginOpen, setLoginOpen] = useState(false);
-
+  const [openModal, setOpenModal] = useState(false);
   const { id } = useParams();
   const user = getCurrentUser();
   const token = getToken();
@@ -67,6 +68,10 @@ function InventoryDetail() {
     }
   };
 
+  const handleUpdateInventory = () => {
+    setOpenModal(true);
+  };
+
   const handleChat = () => {
     setSelectedConversation(postedBy);
     if (!user) {
@@ -99,6 +104,10 @@ function InventoryDetail() {
           notNavigation={true}
         />
       </ModalCustom>
+
+      <ModalCustom open={openModal} setOpen={() => setOpenModal(!openModal)}>
+        <UpdateInventoryAdd id={id} />
+      </ModalCustom>
       <NavbarComponent />
       {isLoading ? (
         <SpinnerComponent />
@@ -125,12 +134,21 @@ function InventoryDetail() {
               </Button>
             )}
             {user && user?._id === postedBy?._id && status === "posted" ? (
-              <Button
-                className="bg-red-500 w-[100px]"
-                onClick={handleDeleteInventory}
-              >
-                {loading ? "Deleting..." : "Delete"}
-              </Button>
+              <>
+                <Button
+                  className="bg-red-500 w-[100px]"
+                  onClick={handleDeleteInventory}
+                >
+                  {loading ? "Deleting..." : "Delete"}
+                </Button>
+
+                <Button
+                  className="bg-blue-500 w-[100px] ml-2"
+                  onClick={handleUpdateInventory}
+                >
+                  {loading ? "Updating..." : "Update"}
+                </Button>
+              </>
             ) : (
               user &&
               user?._id === postedBy?._id && (

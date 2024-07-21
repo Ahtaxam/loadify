@@ -18,10 +18,13 @@ import useConversation from "../zustand/userConversation";
 import ModalCustom from "./modal";
 import Inventories from "../screens/bookLoader";
 import Login from "../screens/auth/Login";
+import UpdateLoaderAdd from "../screens/updateAdds/loader";
 
 function LoaderDetail() {
   const [openModal, setOpenModal] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [updateOpen, setUpdateOpen] = useState(false);
+
   const current = useSelector((state) => state.currentUser);
   const { id } = useParams();
   const user = getCurrentUser();
@@ -71,6 +74,10 @@ function LoaderDetail() {
     setOpenModal(true);
   };
 
+  const handleUpdateLoader = () => {
+    setUpdateOpen(true);
+  };
+
   return (
     <>
       <ModalCustom open={openModal} setOpen={() => setOpenModal(!openModal)}>
@@ -85,6 +92,10 @@ function LoaderDetail() {
           closeModal={() => setLoginOpen(!loginOpen)}
           notNavigation={true}
         />
+      </ModalCustom>
+
+      <ModalCustom open={updateOpen} setOpen={() => setUpdateOpen(!updateOpen)}>
+        <UpdateLoaderAdd id={_id} />
       </ModalCustom>
       <NavbarComponent />
       {isLoading ? (
@@ -103,12 +114,26 @@ function LoaderDetail() {
             )}
 
             {user && user?._id === postedBy?._id && (
-              <Button
-                className="bg-red-500 w-[100px] "
-                onClick={handleDeleteLoader}
-              >
-                {loading ? "Deleting..." : "Delete"}
-              </Button>
+              <>
+                <Button
+                  className="bg-red-500 w-[100px] "
+                  onClick={handleDeleteLoader}
+                >
+                  {loading ? "Deleting..." : "Delete"}
+                </Button>
+                {status !== "Posted" ? (
+                  <Button
+                    className="bg-blue-500 w-[100px] "
+                    onClick={handleUpdateLoader}
+                  >
+                    {loading ? "Updating..." : "Update"}
+                  </Button>
+                ) : (
+                  <Button className="bg-navy w-[100px] hover:bg-[hsl(0,100%,4%)] hover:text-white cursor-not-allowed">
+                    {status}
+                  </Button>
+                )}
+              </>
             )}
             {user && user?._id !== postedBy?._id && (
               <Button

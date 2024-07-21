@@ -26,7 +26,6 @@ const UploadImage = ({
           onChange={handleFileChange}
           className="hidden"
           id={`upload-${name}`}
-          
         />
         <label htmlFor={`upload-${name}`} className="cursor-pointer">
           <div className="border-dashed border-2 border-gray-300 p-4 h-36 flex items-center justify-center">
@@ -36,7 +35,7 @@ const UploadImage = ({
       </div>
       <div className="col-span-2">
         <div className="mt-2 grid grid-cols-2 gap-3">
-          {images.map((preview, index) => (
+          {images?.map((preview, index) => (
             <div key={index} className="relative">
               <img
                 src={URL.createObjectURL(preview)}
