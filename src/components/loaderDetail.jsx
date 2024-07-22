@@ -8,7 +8,7 @@ import {
   useDeleteLoaderMutation,
   useGetSingleLoaderQuery,
 } from "../redux/api/truckadd";
-import { getCurrentUser, getUserRole } from "../utils/currentUser";
+import { getCurrentUser, getToken, getUserRole } from "../utils/currentUser";
 import NavbarComponent from "./navbar";
 import { toast } from "react-toastify";
 import { PATH } from "../utils/path";
@@ -28,6 +28,7 @@ function LoaderDetail() {
   const current = useSelector((state) => state.currentUser);
   const { id } = useParams();
   const user = getCurrentUser();
+  const token = getToken();
   const navigate = useNavigate();
   const role = getUserRole();
   const { data, isLoading } = useGetSingleLoaderQuery(id);
@@ -51,7 +52,7 @@ function LoaderDetail() {
   } = data?.data || {};
   const handleDeleteLoader = async () => {
     try {
-      const { message } = await deleteLoader(_id).unwrap();
+      const { message } = await deleteLoader({ _id, token }).unwrap();
       toast.success(message);
       navigate(PATH.MYADDS);
       dispatch(truckAddApi.util.invalidateTags(["Truck"]));
@@ -121,7 +122,7 @@ function LoaderDetail() {
                 >
                   {loading ? "Deleting..." : "Delete"}
                 </Button>
-                {status !== "Posted" ? (
+                {status === "posted" ? (
                   <Button
                     className="bg-blue-500 w-[100px] "
                     onClick={handleUpdateLoader}

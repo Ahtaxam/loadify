@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getToken } from "../../utils/currentUser";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-const token = getToken();
 
 export const truckAddApi = createApi({
   reducerPath: "truckAddApi",
@@ -28,12 +27,12 @@ export const truckAddApi = createApi({
           Authorization: `Bearer ${authToken}`,
         },
       }),
-      providesTags:["Truck"]
+      providesTags: ["Truck"],
     }),
 
     deleteLoader: builder.mutation({
-      query: (id) => ({
-        url: `/loader/${id}`,
+      query: ({ _id, token }) => ({
+        url: `/loader/${_id}`,
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
